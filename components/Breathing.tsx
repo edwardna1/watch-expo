@@ -8,7 +8,7 @@ type BreathingProps = PropsWithChildren<{
 }>;
 
 const Breathing: React.FC<BreathingProps> = (props) => {
-  const fadeAnim = useRef(new Animated.Value(0.3)).current; // Initial value for opacity: 0
+  const fadeAnim = useRef(new Animated.Value(0.1)).current; // Initial value for opacity: 0
 
   const size = fadeAnim.interpolate({
     inputRange: [0, 1],
@@ -40,7 +40,7 @@ const Breathing: React.FC<BreathingProps> = (props) => {
             useNativeDriver: true,
           }),
           Animated.timing(fadeAnim, {
-            toValue: 0.3,
+            toValue: 0.1,
             duration: 800,
             easing: Easing.linear,
             useNativeDriver: true,
