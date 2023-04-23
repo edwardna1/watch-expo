@@ -71,7 +71,7 @@ const Animtitle: React.FC<BreathingProps> = (props) => {
         }),
         Animated.delay(100),
         startTitleAnimation(),
-        // Animated.delay(100),
+        Animated.delay(100),
       ]),
     ]).start(() => {
       console.log("Animation DONE");
