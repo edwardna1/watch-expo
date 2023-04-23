@@ -20,7 +20,23 @@ const Clicks = () => {
   );
 
   return (
-    <SafeAreaView className="flex-1 flex items-center justify-center space-y-8">
+    <SafeAreaView className="flex-1 flex items-center justify-center space-y-8 ">
+      <View className="container m-auto grid grid-cols-3">
+        {/* <View className="grid grid-rows-3 gap-2"> */}
+          <View>
+            <Text>Hello</Text>
+          </View>
+          <View>
+            <Text>Hello</Text>
+          </View>
+          <View>
+            <Text>Hello</Text>
+          </View>
+          <View>
+            <Text>Hello</Text>
+          </View>
+        {/* </View> */}
+      </View>
       <Text className="text-xl w-64 text-center">
         Hi, this is a page where you can update the number of clicks with
         zustand
@@ -40,10 +56,7 @@ const Clicks = () => {
           <Text className="text-md">+</Text>
         </TouchableOpacity>
       </View>
-      <Link
-        className="text-center w-48 bg-violet-400 text-md p-2"
-        href="/"
-      >
+      <Link className="text-center w-48 bg-violet-400 text-md p-2" href="/">
         Go to Home Page
       </Link>
     </SafeAreaView>

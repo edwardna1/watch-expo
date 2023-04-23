@@ -19,6 +19,7 @@ console.log("LOGGING EXPO IOS CONSOLE");
 const App = () => {
   // const fadeAnim = useRef(new Animated.Value(0)).current;
   const click = useStore(useCallback((state) => state.click, []));
+  const [isAnimDone, setIsAnimDone] = useState(false);
   let [fontsLoaded] = useFonts({
     Inter: Inter_900Black,
     Sans: OpenSans_400Regular,
@@ -29,39 +30,40 @@ const App = () => {
   if (!fontsLoaded) {
     return null;
   }
+  console.log("isAnimDone", isAnimDone);
   return (
-    <SafeAreaView className="flex-1 flex items-center justify-center space-y-8 bg-black">
-      {/* <View className="bg-[#202020]">
-        <Image
-          className="w-56 h-56 rounded-md"
-          source={require("@assets/images/tea.jpg")}
-        />
-        <Text>Photo by Rumman Amin on Unsplash</Text>
-      </View> */}
-      <Animtitle>
-        <Image
-          className="ml-5"
-          source={require("@assets/Add_round_light.png")}
-        />
-        {/* <Text className="text-7xl font-bold text-white font-nunl tracking-widest"> */}
-          {/* Watch
-        </Text> */}
-      </Animtitle>
-      <View>
-        <Link
-          className={`text-center w-full text-2xl p-2 text-white font-nunl`}
-          href="/hello"
-        >
-          <Breathing>
-            <Text className="text-white text-2xl">Tap to get started</Text>
-          </Breathing>
-        </Link>
+    <SafeAreaView className="flex-1 flex bg-black">
+      <View className="h-[50%]">
+        <View>
+          <Animtitle setIsAnimDone={setIsAnimDone}>
+            <Image source={require("@assets/eyelogoremoved.png")} />
+          </Animtitle>
+        </View>
       </View>
-      <View></View>
-      <Text className="text-xl">Look at the number of clicks: {click}</Text>
-      <Link className="text-center w-48 text-white text-md p-2" href="/clicks">
-        Go to the testing page
-      </Link>
+      {isAnimDone && (
+        <View className="justify-start items-center space-y-4 h-2/3 block">
+          <View>
+            <Link
+              className={`font-nunl mt-20`}
+              href="/hello"
+            >
+              <Breathing>
+                <Text className="text-white text-xl">Tap to get started</Text>
+              </Breathing>
+            </Link>
+          </View>
+          <View></View>
+          <Text className="text-xl">Look at the number of clicks: {click}</Text>
+          <Breathing>
+            <Link
+              className="text-center w-48 text-white text-md p-2"
+              href="/clicks"
+            >
+              Go to the testing page
+            </Link>
+          </Breathing>
+        </View>
+      )}
     </SafeAreaView>
   );
 };
