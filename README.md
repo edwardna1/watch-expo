@@ -1,13 +1,10 @@
-# Chai Stack ☕
+# The cool stack
 
-This is an opinionated react-native stack with Typescript, Expo Router, Tailwind(Nativewind) & Zustand
+Hello this is an opinionated react-native stack with Typescript, Expo Router, Tailwind(Nativewind) & Zustand
 
 ## 🚀 Quickstart
 
-```sh
-npx degit aviavinav/chai my-project
-
-cd my-project && yarn install
+cd my-project && yarn install && npm i
 
 yarn start
 ```
