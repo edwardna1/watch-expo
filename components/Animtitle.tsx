@@ -67,7 +67,7 @@ const Animtitle: React.FC<BreathingProps> = (props) => {
         }),
         Animated.timing(fadeAnim, {
           toValue: 0.3,
-          duration: 1300,
+          duration: 1200,
           easing: Easing.elastic(0.68),
           useNativeDriver: true,
         }),
