@@ -1,86 +1,74 @@
 import React, { PropsWithChildren, useEffect, useRef, useState } from "react";
-import { Animated, ViewStyle, Text, Easing } from "react-native";
+import { Animated, ViewStyle, Text, Easing, View } from "react-native";
 
 type BreathingProps = PropsWithChildren<{
-  style?: ViewStyle;
+  // style?: ViewStyle;
   isText?: boolean;
-  transform?: boolean;
+  class?: string;
+  runOnce?: boolean;
+  cool?: boolean;
 }>;
 
 const Breathing: React.FC<BreathingProps> = (props) => {
   const fadeAnim = useRef(new Animated.Value(0.1)).current; // Initial value for opacity: 0
+// console.log("props", props);
 
-  const size = fadeAnim.interpolate({
-    inputRange: [0, 1],
-    outputRange: [0, 10],
-  });
-
-  const startAnimation = () => {
+  const onceAnimation = () => {
     Animated.timing(fadeAnim, {
-      toValue: 0.3,
-      duration: 800,
+      toValue: 1,
+      duration: 300,
       easing: Easing.linear,
       useNativeDriver: true,
     }).start(() => {
-      fadeAnim.setValue(0.3);
+      console.log("done running once");
     });
   };
 
   useEffect(() => {
-    console.log("here1");
     // startAnimation();
-    Animated.sequence([
-      // Animated.delay(2000),
-      Animated.loop(
-        Animated.sequence([
-          Animated.timing(fadeAnim, {
-            toValue: 1,
-            duration: 800,
-            easing: Easing.linear,
-            useNativeDriver: true,
-          }),
-          Animated.timing(fadeAnim, {
-            toValue: 0.1,
-            duration: 800,
-            easing: Easing.linear,
-            useNativeDriver: true,
-          }),
-        ])
-      ),
-    ]).start(() => {
-      console.log("here");
-    });
+    if (props.runOnce) {
+      onceAnimation();
+    } else {
+      Animated.sequence([
+        // Animated.delay(2000),
+        Animated.loop(
+          Animated.sequence([
+            Animated.timing(fadeAnim, {
+              toValue: 1,
+              duration: 800,
+              easing: Easing.linear,
+              useNativeDriver: true,
+            }),
+            Animated.timing(fadeAnim, {
+              toValue: 0.1,
+              duration: 800,
+              easing: Easing.linear,
+              useNativeDriver: true,
+            }),
+          ])
+        ),
+      ]).start();
+    }
   }, [fadeAnim]);
 
   return props.isText ? (
     <Animated.Text // Special animatable View
-      style={{
-        ...props.style,
-        opacity: fadeAnim, // Bind opacity to animated value
-      }}
+      style={
+        {
+          // ...props.style,
+          // opacity: fadeAnim, // Bind opacity to animated value
+        }
+      }
     >
       {props.children}
     </Animated.Text>
   ) : (
     <Animated.View // Special animatable View
-      style={[
-        {
-          ...props.style,
-          opacity: fadeAnim, // Bind opacity to animated value
-        },
-        props.transform
-          ? {
-              transform: [
-                {
-                  scaleX: size,
-                },
-                {
-                  scaleY: size,
-                },
-              ],
-            }
-          : {},
-      ]}
+      style={{
+        // ...props.style,
+        opacity: fadeAnim, // Bind opacity to animated value
+      }}
+      className={props.class ?? ""}
     >
       {props.children}
     </Animated.View>

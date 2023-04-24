@@ -1,10 +1,10 @@
-import React, { PropsWithChildren, useEffect, useRef, useState } from "react";
+import { useStore } from "@lib/store";
+import React, { PropsWithChildren, useCallback, useEffect, useRef, useState } from "react";
 import { Animated, ViewStyle, Text, Easing, View } from "react-native";
 
 type BreathingProps = PropsWithChildren<{
   style?: ViewStyle;
   transform?: boolean;
-  setIsAnimDone: any;
 }>;
 
 const Animtitle: React.FC<BreathingProps> = (props) => {
@@ -12,11 +12,13 @@ const Animtitle: React.FC<BreathingProps> = (props) => {
   const textAnim = useRef(
     Array.from({ length: 5 }).map((x) => new Animated.Value(0))
   ).current;
-
-  const word = "Watch".split("");
+  const finishAnimation = useStore(
+    useCallback((state) => state.finishAnimation, [])
+  );
+  const word = "WATCH".split("");
 
   const startTitleAnimation = () => {
-    return Animated.stagger(100, [
+    return Animated.stagger(50, [
       Animated.timing(textAnim[0], {
         toValue: 1,
         duration: 500,
@@ -54,7 +56,7 @@ const Animtitle: React.FC<BreathingProps> = (props) => {
     console.log("Started anim");
 
     Animated.sequence([
-      // Animated.delay(2000),
+      Animated.delay(500),
 
       Animated.sequence([
         Animated.timing(fadeAnim, {
@@ -65,17 +67,17 @@ const Animtitle: React.FC<BreathingProps> = (props) => {
         }),
         Animated.timing(fadeAnim, {
           toValue: 0.3,
-          duration: 1500,
+          duration: 1300,
           easing: Easing.elastic(0.68),
           useNativeDriver: true,
         }),
-        Animated.delay(100),
+        // Animated.delay(50),
         startTitleAnimation(),
-        Animated.delay(100),
+        Animated.delay(1000),
       ]),
     ]).start(() => {
       console.log("Animation DONE");
-      props.setIsAnimDone(true)
+      finishAnimation()
     });
   }, [fadeAnim]);
   // console.log("props.children", props.children);
@@ -115,7 +117,7 @@ const Animtitle: React.FC<BreathingProps> = (props) => {
                 },
               ]}
             >
-              <Text className="text-white text-6xl font-bold font-nunl justify-center tracking-widest mt-5">
+              <Text className="text-white text-6xl font-sans justify-center tracking-widest mt-5">
                 {letter}
               </Text>
             </Animated.Text>

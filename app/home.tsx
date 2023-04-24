@@ -1,38 +1,48 @@
 import { SafeAreaView } from "react-native-safe-area-context";
-import { Link } from "expo-router";
+import { Link, useRouter } from "expo-router";
 import React from "react";
 import { Text, Linking, Image, View, TouchableOpacity } from "react-native";
 
-const Hello = () => {
+const home = () => {
+  const router = useRouter();
   return (
     <SafeAreaView className="flex-1 bg-[#202020]">
-      <View className="w-screen h-28 bg-[#202020] items-stretch justify-end">
-        <View className="flex-row flex-none justify-between">
+      <View className="w-screen h-[10%] items-stretch justify-end">
+        <View className="flex flex-row flex-no-wrap justify-between">
           <Image
             className="ml-5"
             source={require("@assets/Add_round_light.png")}
           />
-          <Text className="text-white font-bold text-center	text-3xl">
-            Watch
-          </Text>
-          <Image
-            className="mr-8 mt-1"
-            source={require("@assets/User_light.png")}
-          />
+          <TouchableOpacity
+            onPress={() => {
+              router.push("/");
+            }}
+          >
+            <Text className="text-white font-bold text-center	text-3xl">
+              Watch
+            </Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => {
+              router.push("/profile");
+            }}
+          >
+            <Image
+              className="mr-8 mt-2"
+              source={require("@assets/User_light.png")}
+            />
+          </TouchableOpacity>
         </View>
       </View>
-      <View className="h-screen w-screen absolute justify-center items-center">
+      <View className="flex-1 justify-center items-center">
         <TouchableOpacity
-          onPress={() =>
-            Linking.openURL("https://www.instagram.com/muhammad__dawood/")
-          }
+          onPress={() => {
+            router.push("/lock");
+          }}
         >
           <Image className="m-auto" source={require("@assets/Powerr.png")} />
         </TouchableOpacity>
       </View>
-      <Link className="text-center w-48 bg-violet-400 text-md p-2" href="/">
-        Go to Home Page
-      </Link>
       <View className=" w-screen items-center absolute bottom-10">
         <Image source={require("@assets/Expand_left_light.png")} />
         <Text className="text-white text-l">Select Device</Text>
@@ -41,7 +51,7 @@ const Hello = () => {
   );
 };
 
-export default Hello;
+export default home;
 
 // // const Hello = () => {
 // //   return (

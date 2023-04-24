@@ -9,6 +9,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { Link } from "expo-router";
 import { useStore } from "@lib/store";
 import { useCallback } from "react";
+import React from "react";
 
 const Clicks = () => {
   const click = useStore(useCallback((state) => state.click, []));
