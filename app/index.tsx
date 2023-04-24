@@ -27,6 +27,23 @@ const App = () => {
   return (
     <SafeAreaView className="flex-1 flex bg-black">
       <View className="h-[50%]">
+        <TouchableOpacity
+          onPress={() => {
+            router.push("/login");
+          }}
+        >
+          <Breathing
+            class="border-2 py-3 px-10 rounded-lg bg-[#450202] focus:bg-[#b9b9b9] w-1/3 items-center justify-center flex flex-nowrap"
+            runOnce={true}
+            cool={true}
+          >
+            {/* <Text className="text-white">sss</Text> */}
+            {/* Get started */}
+            <Text className="text-white font-lato text-lg flex flex-nowrap">
+              Login
+            </Text>
+          </Breathing>
+        </TouchableOpacity>
         <View>
           <Animtitle>
             <Image source={require("@assets/eyelogoremoved.png")} />
@@ -62,7 +79,6 @@ const App = () => {
             </Breathing>
           </TouchableOpacity>
           {/* </Link> */}
-
           {/* </Link> */}
           {/* </TouchableOpacity> */}
 
