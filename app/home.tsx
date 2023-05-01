@@ -6,8 +6,8 @@ import { Text, Linking, Image, View, TouchableOpacity } from "react-native";
 const home = () => {
   const router = useRouter();
   return (
-    <SafeAreaView className="flex-1 bg-[#202020]">
-      <View className="w-screen h-[10%] items-stretch justify-end">
+    <SafeAreaView className="flex-1 bg-[#000000]">
+      <View className="w-screen h-[8%] items-stretch justify-end">
         <View className="flex flex-row flex-no-wrap justify-between">
           <Image
             className="ml-5"
@@ -34,18 +34,38 @@ const home = () => {
           </TouchableOpacity>
         </View>
       </View>
-      <View className="flex-1 justify-center items-center">
-        <TouchableOpacity
-          onPress={() => {
-            router.push("/lock");
-          }}
-        >
-          <Image className="m-auto" source={require("@assets/Powerr.png")} />
-        </TouchableOpacity>
+      <View className="flex h-[85%] relative items-center">
+        <View className="absolute top-[15%] ">
+          <TouchableOpacity
+            onPress={() => {
+              router.push("/lock");
+            }}
+          >
+            <Image
+              className=" m-auto top-[90%] "
+              source={require("@assets/Powerr.png")}
+            />
+          </TouchableOpacity>
+        </View>
+        <View className="bg-[#0B0B0B] justify-center absolute h-[20%] bottom-[2%] rounded-3xl w-[95%] border border-[#181818]">
+          <View className="left-[8%] flex-row ">
+            <Image source={require("@assets/desktop.png")} />
+            <View className="justify-center gap-y-[2%] ml-[2%] ">
+              <Text className="text-white text-base">Eddie's Laptop</Text>
+              <View className="w-screen">
+                <View className="h-px w-7/12 bg-[#646464]"></View>
+              </View>
+              <Text className="text-white text-sm">
+                Added: September 19, 2021
+              </Text>
+            </View>
+          </View>
+        </View>
       </View>
-      <View className=" w-screen items-center absolute bottom-10">
+
+      <View className="h-full w-screen items-center bottom-0">
         <Image source={require("@assets/Expand_left_light.png")} />
-        <Text className="text-white text-l">Select Device</Text>
+        <Text className="text-white text-sm">Select Device</Text>
       </View>
     </SafeAreaView>
   );
