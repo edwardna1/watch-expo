@@ -47,7 +47,7 @@ const home = () => {
             />
           </TouchableOpacity>
         </View>
-        <View className="bg-[#0B0B0B] justify-center absolute h-[20%] bottom-[2%] rounded-3xl w-[95%] border border-[#181818]">
+        <View className="bg-[#0c0c0c] justify-center absolute h-[20%] bottom-[5%] rounded-3xl w-[95%] border">
           <View className="left-[8%] flex-row ">
             <Image source={require("@assets/desktop.png")} />
             <View className="justify-center gap-y-[2%] ml-[2%] ">
@@ -60,6 +60,12 @@ const home = () => {
               </Text>
             </View>
           </View>
+        </View>
+        <View className="bg-[#0c0c0c] justify-center absolute h-[2%] bottom-[3%] rounded-b-full w-[85%] border">
+          
+        </View>
+        <View className="bg-[#0c0c0c] justify-center absolute h-[2%] bottom-[1%] rounded-b-full w-[75%] border">
+          
         </View>
       </View>
 

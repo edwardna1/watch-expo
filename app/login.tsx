@@ -21,9 +21,9 @@ const SignIn = () => {
             onPress={() => {
               router.push("/");
             }}
-            className="m-[6%]"
+            className="my-[6%] mx-[3%] "
           >
-            <Image source={require("@assets/Arrow.png")} />
+            <Image source={require("@assets/BackArrow.png")} />
           </TouchableOpacity>
           <View className="items-center my-4">
             <View className="text-center">
