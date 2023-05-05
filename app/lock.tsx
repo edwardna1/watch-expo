@@ -8,14 +8,14 @@ import Breathing from "@components/Breathing";
 const DefaultLockScreen = () => {
   const router = useRouter();
   return (
-    <SafeAreaView className="flex-1 bg-[#202020]">
-      <View className="mt-5 ml-10 w-screen h-28 bg-[#202020] items-stretch justify-end">
+    <SafeAreaView className="flex-1 bg-[#000000]">
+      <View className="mt-5 ml-10 w-screen h-[8%] bg-[#000000] items-stretch justify-end">
         <Text className="mb-2 font-extrabold text-4xl text-white">
           Edwards Laptop
         </Text>
       </View>
 
-      <View className="ml-10 w-screen bg-[#202020] flex-row ">
+      <View className="ml-10 w-screen bg-[#000000] flex-row ">
         <View>
           <Text className="font-semibold  text-white">LOCKED MODE</Text>
         </View>
@@ -36,11 +36,11 @@ const DefaultLockScreen = () => {
         </View>
       </View>
 
-      <View className="h-3/5 w-screen justify-center">
+      <View className="h-[65%] w-screen justify-center">
         <Image className="mr-9" source={require("@assets/LaptopMain.png")} />
       </View>
 
-      <View className=" w-screen items-center absolute bottom-20">
+      <View className=" w-screen items-center absolute bottom-[6%]">
         {/* <Image source={require("@assets/Slide.png")} />
          */}
         <Slider
