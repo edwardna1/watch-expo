@@ -8,7 +8,9 @@ module.exports = {
         sans: ['Sans', 'sans-serif'],
         lato: ['Lato', 'sans-serif'],
         nunl: ['Nunlg', 'sans-serif'],
-        bng: ['bng', 'sans-serif']
+        bng: ['bng', 'sans-serif'],
+        nuns: ['Nunsb', 'sans-serif'],
+        mon : ['Mon', 'sans-serif']
       }
     },
   },
