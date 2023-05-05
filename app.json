@@ -1,9 +1,11 @@
 {
   "expo": {
     "scheme": "myapp",
-
     "web": {
       "bundler": "metro"
+    },
+    "android": {
+      "package": "com.enclassy.watchexpo"
     }
   }
 }
