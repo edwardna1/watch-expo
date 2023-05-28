@@ -6,6 +6,8 @@ import data from "./data";
 import MyDevice from "./myDevice";
 import { Ionicons } from "@expo/vector-icons";
 import { Feather } from "@expo/vector-icons";
+import { MaterialIcons } from '@expo/vector-icons'; 
+
 
 const home = () => {
   const router = useRouter();
@@ -49,7 +51,7 @@ const home = () => {
             />
           </TouchableOpacity>
         </View>
-        <View className="bg-[#0e0e0e] justify-center absolute h-[20%] bottom-[3%] rounded-3xl w-[95%] border ">
+        <View className="bg-[#0e0e0e] justify-center absolute h-[18%] bottom-[3%] rounded-3xl w-[95%] border ">
           {Device}
         </View>
       </View>
