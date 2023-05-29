@@ -9,7 +9,6 @@ export default function myDevice(props) {
       <Image source={require("@assets/desktop.png")} />
       <View className="justify-center gap-y-[2%] ml-[2%] ">
         <View className="flex-row flex">
-          <Text className="text-lg text-white font-bold"></Text>
           <Text className="text-white text-lg ">{props.name}</Text>
         </View>
         <View className="w-screen">
