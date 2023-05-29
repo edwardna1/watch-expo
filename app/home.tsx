@@ -2,24 +2,29 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { Link, useRouter } from "expo-router";
 import React from "react";
 import { Text, Linking, Image, View, TouchableOpacity } from "react-native";
+import data from "./data";
+import MyDevice from "./myDevice";
+import { Ionicons } from "@expo/vector-icons";
+import { Feather } from "@expo/vector-icons";
 
 const home = () => {
   const router = useRouter();
+  const Device = data.map((item) => {
+    return <MyDevice name={item.name} date={item.date} />;
+  });
+
   return (
     <SafeAreaView className="flex-1 bg-[#000000]">
-      <View className="w-screen h-[8%] items-stretch justify-end">
-        <View className="flex flex-row flex-no-wrap justify-between">
-          <Image
-            className="ml-5"
-            source={require("@assets/Add_round_light.png")}
-          />
+      <View className="w-screen h-[8%]">
+        <View className="flex flex-row items-center justify-between mx-[5%] mt-[5%]">
+          <Ionicons name="add" size={35} color="white" />
           <TouchableOpacity
             onPress={() => {
               router.push("/");
             }}
           >
             <Text className="text-white font-bold text-center	text-3xl">
-              Watch
+              Tether
             </Text>
           </TouchableOpacity>
           <TouchableOpacity
@@ -27,10 +32,7 @@ const home = () => {
               router.push("/profile");
             }}
           >
-            <Image
-              className="mr-8 mt-2"
-              source={require("@assets/User_light.png")}
-            />
+            <Ionicons name="ios-person-outline" size={24} color="white" />
           </TouchableOpacity>
         </View>
       </View>
@@ -47,25 +49,8 @@ const home = () => {
             />
           </TouchableOpacity>
         </View>
-        <View className="bg-[#0c0c0c] justify-center absolute h-[20%] bottom-[5%] rounded-3xl w-[95%] border">
-          <View className="left-[8%] flex-row ">
-            <Image source={require("@assets/desktop.png")} />
-            <View className="justify-center gap-y-[2%] ml-[2%] ">
-              <Text className="text-white text-base">Eddie's Laptop</Text>
-              <View className="w-screen">
-                <View className="h-px w-7/12 bg-[#646464]"></View>
-              </View>
-              <Text className="text-white text-sm">
-                Added: September 19, 2021
-              </Text>
-            </View>
-          </View>
-        </View>
-        <View className="bg-[#0c0c0c] justify-center absolute h-[2%] bottom-[3%] rounded-b-full w-[85%] border">
-          
-        </View>
-        <View className="bg-[#0c0c0c] justify-center absolute h-[2%] bottom-[1%] rounded-b-full w-[75%] border">
-          
+        <View className="bg-[#0e0e0e] justify-center absolute h-[20%] bottom-[3%] rounded-3xl w-[95%] border ">
+          {Device}
         </View>
       </View>
 
@@ -78,16 +63,3 @@ const home = () => {
 };
 
 export default home;
-
-// // const Hello = () => {
-// //   return (
-// //     <SafeAreaView className="flex-1 flex items-center justify-center space-y-8">
-// //       <Text className="text-xl">Hi 👋, this is another page</Text>
-// //       <Link className="text-center w-48 bg-violet-400 text-md p-2" href="/">
-// //         Go to Home Page
-// //       </Link>
-// //     </SafeAreaView>
-// //   );
-// // };
-
-// export default Hello;
