@@ -31,7 +31,7 @@ const home = () => {
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() => {
-              router.push("/profile");
+              router.push("/Profile/profile");
             }}
           >
             <Ionicons name="ios-person-outline" size={24} color="white" />

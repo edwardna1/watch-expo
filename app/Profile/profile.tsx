@@ -18,31 +18,37 @@ const MainProfile = () => {
           }}
           className="mt-[6%] mx-[3%] "
         >
-          <Image source={require("@assets/BackArrow.png")} />
+          <AntDesign name="left" size={24} color="white" />
         </TouchableOpacity>
       </View>
       <View className="mx-[5%] my-[12%]  ">
         <Text className="text-white text-4xl">Edward Na</Text>
       </View>
 
-      <View className="flex justify-between items-center flex-row mx-[7%]">
+      <View className="flex justify-between items-center flex-row mx-[5%]">
         <View className="flex mr-[10%]">
           <Ionicons name="settings-outline" size={30} color="white" />
         </View>
         <View className="flex mr-auto">
-          <Text className="text-white text-lg">Settings</Text>
+          <Text className="text-white text-base">Settings</Text>
         </View>
-        <View className="flex">
+
+        <TouchableOpacity
+          onPress={() => {
+            router.push("/Profile/settings");
+          }}
+          className="flex"
+        >
           <AntDesign name="right" size={24} color="white" />
-        </View>
+        </TouchableOpacity>
       </View>
 
-      <View className="flex mt-[12%] justify-between items-center flex-row mx-[7%]">
+      <View className="flex mt-[12%] justify-between items-center flex-row mx-[5%]">
         <View className="flex mr-[10%]">
           <MaterialIcons name="logout" size={30} color="white" />
         </View>
         <View className="flex mr-auto">
-          <Text className="text-white text-lg">Logout</Text>
+          <Text className="text-white text-base">Logout</Text>
         </View>
       </View>
     </SafeAreaView>
