@@ -2,26 +2,24 @@ import { useRouter } from "expo-router";
 import React from "react";
 import { Text, Image, View, SafeAreaView } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
-import { FcHeadset } from "react-icons/fc";
 import { AntDesign } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
+import BackButton from "@components/common/BackButton";
 
 const MainProfile = () => {
   const router = useRouter();
   return (
     <SafeAreaView className="flex-1 relative bg-[#000000]">
-      <View className="">
-        <TouchableOpacity
+      <View className="flex">
+        <BackButton
           onPress={() => {
             router.push("/home");
           }}
-          className="mt-[6%] mx-[3%] "
-        >
-          <AntDesign name="left" size={24} color="white" />
-        </TouchableOpacity>
+          classNames={""}
+        />
       </View>
-      <View className="mx-[5%] my-[12%]  ">
+      <View className="mx-[10%] my-[12%]">
         <Text className="text-white text-4xl">Edward Na</Text>
       </View>
 

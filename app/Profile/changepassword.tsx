@@ -1,11 +1,8 @@
 import { useRouter } from "expo-router";
 import React from "react";
-import { Text, Image, View, SafeAreaView } from "react-native";
+import { Text, Image, View, SafeAreaView, TextInput } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { AntDesign } from "@expo/vector-icons";
-import { Ionicons } from "@expo/vector-icons";
-import { MaterialIcons } from "@expo/vector-icons";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 const changePassword = () => {
   const router = useRouter();
@@ -35,7 +32,11 @@ const changePassword = () => {
 
       <View className="flex justify-between items-center flex-row mx-[5%]">
         <View className="flex">
-          <Text className="text-[#9B9B9B] text-base"> Current password</Text>
+          <TextInput
+            className="text-[#9B9B9B] text-base w-screen"
+            placeholder="Current password"
+            placeholderTextColor="#9B9B9B"
+          ></TextInput>
         </View>
       </View>
 
@@ -45,7 +46,11 @@ const changePassword = () => {
 
       <View className="flex justify-between items-center flex-row mx-[5%]">
         <View className="flex mr-[18%]">
-          <Text className="text-[#9B9B9B] text-base">New Password</Text>
+          <TextInput
+            className="text-[#9B9B9B] text-base w-screen"
+            placeholder="New password"
+            placeholderTextColor="#9B9B9B"
+          ></TextInput>
         </View>
       </View>
 
@@ -55,7 +60,11 @@ const changePassword = () => {
 
       <View className="flex justify-between items-center flex-row mx-[5%]">
         <View className="flex mr-[18%]">
-          <Text className="text-[#9B9B9B] text-base">Confirm New Password</Text>
+          <TextInput
+            className="text-[#9B9B9B] text-base w-screen"
+            placeholder="Confirm new password"
+            placeholderTextColor="#9B9B9B"
+          ></TextInput>
         </View>
       </View>
 
