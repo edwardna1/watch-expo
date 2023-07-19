@@ -3,7 +3,6 @@ import React from "react";
 import { Text, Image, View, SafeAreaView } from "react-native";
 import { useRouter } from "expo-router";
 import Breathing from "@components/Breathing";
-// import { Appbar } from "react-native-paper";
 
 const DefaultLockScreen = () => {
   const router = useRouter();

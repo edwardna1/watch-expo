@@ -9,10 +9,11 @@ import {
   TextInput,
   Button,
   SafeAreaView,
+  TouchableWithoutFeedback,
+  Keyboard
 } from "react-native";
-import { Fontisto } from '@expo/vector-icons'; 
-import { Ionicons } from '@expo/vector-icons'; 
-
+import { Fontisto } from "@expo/vector-icons";
+import { Ionicons } from "@expo/vector-icons";
 
 const SignIn = () => {
   const router = useRouter();
@@ -30,7 +31,7 @@ const SignIn = () => {
           </TouchableOpacity>
           <View className="items-center my-4">
             <View className="text-center">
-              <Text className="text-white font-semibold text-6xl">Watch</Text>
+              <Text className="text-white font-semibold text-6xl">Tether</Text>
             </View>
             <View className="my-[3%]">
               <Text className="text-white font-Nunsm font-light text-lg">
@@ -45,6 +46,7 @@ const SignIn = () => {
                 className="h-16 pl-4 pb-1 border-[#8B8B8B] border-0.5 text-base text-left bg-[#000000] text-[#B5B5B5] rounded-sm align-middle placeholder-[#ffffff] "
                 placeholder="Username"
                 placeholderTextColor="#8B8B8B"
+                autoFocus
               ></TextInput>
             </View>
             <View className="mt-7">
@@ -98,7 +100,7 @@ const SignIn = () => {
           }}
           className="items-center bg-transparent rounded-lg w-[30%] py-3 border-[#8B8B8B] border"
         >
-<Fontisto name="facebook" size={24} color="white" />
+          <Fontisto name="facebook" size={24} color="white" />
         </TouchableOpacity>
         <TouchableOpacity
           onPress={() => {
@@ -106,7 +108,7 @@ const SignIn = () => {
           }}
           className="items-center bg-transparent rounded-lg w-[30%] py-3 border-[#8B8B8B] border"
         >
-         <Ionicons name="ios-logo-google" size={24} color="white" />
+          <Ionicons name="ios-logo-google" size={24} color="white" />
         </TouchableOpacity>
       </View>
 
