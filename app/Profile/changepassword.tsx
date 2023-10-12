@@ -1,11 +1,14 @@
 import { useRouter } from "expo-router";
-import React from "react";
-import { Text, Image, View, SafeAreaView, TextInput } from "react-native";
+import { Text, Image, View, SafeAreaView, TextInput, Modal, Alert } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { AntDesign } from "@expo/vector-icons";
+import React, { useState } from "react";
+import { Feather } from '@expo/vector-icons'; 
+
 
 const changePassword = () => {
   const router = useRouter();
+  const [modalVisible, setModalVisible] = useState(false);
   return (
     <SafeAreaView className="flex-1 relative bg-[#000000]">
       <View className="w-screen h-[8%] mb-[5%] mt-[7%]">
@@ -22,14 +25,62 @@ const changePassword = () => {
               Change Password
             </Text>
           </View>
-          <View className="flex ">
-            <Text className="text-[#9B9B9B] font-bold text-center text-base ">
-              Save
-            </Text>
-          </View>
-        </View>
-      </View>
 
+            <View>
+              <TouchableOpacity
+                onPress={() => {
+                  setModalVisible(true); 
+                }}
+                className="flex"
+              >
+                <Text className="text-[#9B9B9B] font-bold text-center text-base ">
+                  Save
+                </Text>
+              </TouchableOpacity>
+            </View>
+            </View>
+
+            <View className="flex-1 justify-center align-middle m-[10%]">
+              <Modal
+                animationType="slide"
+                transparent={true}
+                visible={modalVisible}
+                onRequestClose={() => {
+                  Alert.alert("Modal has been closed.");
+                  setModalVisible(!modalVisible);
+                }}
+              >
+                <View className="flex-1 justify-center items-center shadow-lg mx-auto">
+                  <View className="items-center justify-center bg-[#131313] rounded-lg w-[80%] p-[10%] border gap-y-[10%]">
+                  <Feather name="check-circle" size={60} color="green" />
+                    <Text className="text-white text-sm text-center">
+                      You're password has been reset!
+                    </Text>
+
+                    <TouchableOpacity
+                      onPress={() => {
+                        router.push("/home");
+                      }}
+                      className="items-center bg-[#FD4444] rounded-lg py-[5%] w-full px-[30%] border"
+                    >
+                      <Text className="text-white text-base font-semibold">
+                        Delete
+                      </Text>
+                    </TouchableOpacity>
+
+                    <TouchableOpacity
+                      onPress={() => {
+                        setModalVisible(!modalVisible);
+                      }}
+                    >
+                      <Text className="text-white text-lg font-semibold">Cancel</Text>
+                    </TouchableOpacity>
+                  </View>
+                </View>
+              </Modal>
+            </View>
+
+      </View>
       <View className="flex justify-between items-center flex-row mx-[5%]">
         <View className="flex">
           <TextInput

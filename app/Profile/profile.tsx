@@ -6,6 +6,8 @@ import { AntDesign } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
 import BackButton from "@components/common/BackButton";
+import SettingRows from "@components/common/SettingRows"
+
 
 const MainProfile = () => {
   const router = useRouter();
@@ -16,30 +18,21 @@ const MainProfile = () => {
           onPress={() => {
             router.push("/home");
           }}
-          classNames={""}
+          classNames={"flex ml-[5%] my-[9%]"}
         />
       </View>
-      <View className="mx-[10%] my-[12%]">
+      <View className="mx-[5%] mb-[12%]">
         <Text className="text-white text-4xl">Edward Na</Text>
       </View>
 
-      <View className="flex justify-between items-center flex-row mx-[5%]">
-        <View className="flex mr-[10%]">
-          <Ionicons name="settings-outline" size={30} color="white" />
-        </View>
-        <View className="flex mr-auto">
-          <Text className="text-white text-base">Settings</Text>
-        </View>
-
-        <TouchableOpacity
-          onPress={() => {
-            router.push("/Profile/settings");
-          }}
-          className="flex"
-        >
-          <AntDesign name="right" size={24} color="white" />
-        </TouchableOpacity>
-      </View>
+      <SettingRows
+      icon = "settings-outline"
+      SectionName= "Settings"
+      onPress ={() => {
+        router.push("/Profile/settings");
+      }}
+      
+      />
 
       <View className="flex mt-[12%] justify-between items-center flex-row mx-[5%]">
         <View className="flex mr-[10%]">
