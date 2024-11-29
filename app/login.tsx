@@ -10,6 +10,7 @@ import {
   Button,
   SafeAreaView,
 } from "react-native";
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 const SignIn = () => {
   const router = useRouter();
@@ -32,6 +33,7 @@ const SignIn = () => {
             <Text className="text-white font-Nunsm font-light text-lg">
               Sign in to your account
             </Text>
+            <Icon size={12} name="amazon"/>
           </View>
         </View>
 

@@ -6,7 +6,7 @@ import { Text, Linking, Image, View, TouchableOpacity } from "react-native";
 const home = () => {
   const router = useRouter();
   return (
-    <SafeAreaView className="flex-1 bg-[#202020]">
+    <SafeAreaView className="flex-1 bg-[#070808]">
       <View className="w-screen h-[10%] items-stretch justify-end">
         <View className="flex flex-row flex-no-wrap justify-between">
           <Image

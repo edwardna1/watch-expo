@@ -25,7 +25,7 @@ const App = () => {
   //   setIsAnimDone(false);
   // }
   return (
-    <SafeAreaView className="flex-1 flex bg-black">
+    <SafeAreaView className="flex-1 flex bg-[#070808]">
       <View className="h-[50%]">
         <TouchableOpacity
           onPress={() => {
