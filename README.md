@@ -1,6 +1,9 @@
-# The cool stack
+# Watch
 
-Hello this is an opinionated react-native stack with Typescript, Expo Router, Tailwind(Nativewind) & Zustand
+MVP mobile and desktop application, empowering users to protect their laptops
+with advanced security features and implemented real-time notifications for immediate al
+
+Made using an opinionated react-native stack with React Native Typescript, Expo Router, Tailwind(Nativewind) & Zustand
 
 ## 🚀 Quickstart
 

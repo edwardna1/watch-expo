@@ -10,6 +10,7 @@ import {
   NunitoSans_700Bold,
   Bangers_400Regular,
   NunitoSans_800ExtraBold,
+  Montserrat_600SemiBold,
 } from "@expo-google-fonts/dev";
 
 SplashScreen.preventAutoHideAsync();
@@ -42,7 +43,9 @@ const AppLayout = () => {
     Sans: OpenSans_400Regular,
     Lato: Lato_400Regular,
     Nunlg: NunitoSans_800ExtraBold,
+    Nunsb: NunitoSans_700Bold,
     bng: Bangers_400Regular,
+    Mon: Montserrat_600SemiBold,
   });
 
   // if (!fontsLoaded) {

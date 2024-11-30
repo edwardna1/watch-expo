@@ -24,18 +24,18 @@ const Clicks = () => {
     <SafeAreaView className="flex-1 flex items-center justify-center space-y-8 ">
       <View className="container m-auto grid grid-cols-3">
         {/* <View className="grid grid-rows-3 gap-2"> */}
-          <View>
-            <Text>Hello</Text>
-          </View>
-          <View>
-            <Text>Hello</Text>
-          </View>
-          <View>
-            <Text>Hello</Text>
-          </View>
-          <View>
-            <Text>Hello</Text>
-          </View>
+        <View>
+          <Text>Hello</Text>
+        </View>
+        <View>
+          <Text>Hello</Text>
+        </View>
+        <View>
+          <Text>Hello</Text>
+        </View>
+        <View>
+          <Text>Hello</Text>
+        </View>
         {/* </View> */}
       </View>
       <Text className="text-xl w-64 text-center">
