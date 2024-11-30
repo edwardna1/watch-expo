@@ -19,7 +19,7 @@ const home = () => {
             }}
           >
             <Text className="text-white font-bold text-center	text-3xl">
-              Watch
+              Tether
             </Text>
           </TouchableOpacity>
           <TouchableOpacity

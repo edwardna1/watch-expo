@@ -4,23 +4,12 @@ module.exports = function (api) {
     presets: ["babel-preset-expo"],
     plugins: [
       "nativewind/babel",
-      require.resolve("expo-router/babel"),
-      [
-        "module-resolver",
-        {
-          alias: {
-            "@assets": "./assets",
-            "@components": "./components",
-            "@lib": "./lib",
-            "@app": "./app",
-          },
-        },
-      ],
-      [
-        'react-native-reanimated/plugin', {
-          relativeSourceLocation: true,
-        },
-      ]
+      // [
+      //   "react-native-reanimated/plugin",
+      //   {
+      //     relativeSourceLocation: true,
+      //   },
+      // ],
     ],
   };
 };

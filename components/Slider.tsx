@@ -1,7 +1,7 @@
 import React from "react";
 import { StyleSheet } from "react-native";
 
-import {LinearGradient} from "expo-linear-gradient";
+import { LinearGradient } from "expo-linear-gradient";
 
 import { PanGestureHandler } from "react-native-gesture-handler";
 import Animated, {
@@ -40,7 +40,6 @@ const SwipeButton = ({ onToggle }) => {
   };
 
   // Gesture Handler Events
-  console.log('x', X.value)
   console.log("wid", H_SWIPE_RANGE);
   const animatedGestureHandler = useAnimatedGestureHandler({
     onStart: (_, ctx: any) => {

@@ -4,12 +4,12 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        Inter: ['Inter', 'sans-serif'],
-        sans: ['Sans', 'sans-serif'],
-        lato: ['Lato', 'sans-serif'],
-        nunl: ['Nunlg', 'sans-serif'],
-        bng: ['bng', 'sans-serif']
-      }
+        Inter: ["Inter", "sans-serif"],
+        sans: ["Sans", "sans-serif"],
+        lato: ["Lato", "sans-serif"],
+        nunl: ["Nunlg", "sans-serif"],
+        bng: ["bng", "sans-serif"],
+      },
     },
   },
   plugins: [],

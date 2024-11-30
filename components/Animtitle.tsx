@@ -1,5 +1,11 @@
 import { useStore } from "@lib/store";
-import React, { PropsWithChildren, useCallback, useEffect, useRef, useState } from "react";
+import React, {
+  PropsWithChildren,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import { Animated, ViewStyle, Text, Easing, View } from "react-native";
 
 type BreathingProps = PropsWithChildren<{
@@ -9,13 +15,15 @@ type BreathingProps = PropsWithChildren<{
 
 const Animtitle: React.FC<BreathingProps> = (props) => {
   const fadeAnim = useRef(new Animated.Value(20)).current; // Initial value for opacity: 0
+  const word = "TETHER".split("");
   const textAnim = useRef(
-    Array.from({ length: 5 }).map((x) => new Animated.Value(0))
+    Array.from({ length: word.length + 1 }).map((x) => new Animated.Value(0))
   ).current;
   const finishAnimation = useStore(
     useCallback((state) => state.finishAnimation, [])
   );
-  const word = "WATCH".split("");
+
+  console.log("tt", word);
 
   const startTitleAnimation = () => {
     return Animated.stagger(50, [
@@ -49,6 +57,12 @@ const Animtitle: React.FC<BreathingProps> = (props) => {
         easing: Easing.linear,
         useNativeDriver: true,
       }),
+      Animated.timing(textAnim[5], {
+        toValue: 1,
+        duration: 500,
+        easing: Easing.linear,
+        useNativeDriver: true,
+      }),
     ]);
   };
 
@@ -60,27 +74,39 @@ const Animtitle: React.FC<BreathingProps> = (props) => {
 
       Animated.sequence([
         Animated.timing(fadeAnim, {
-          toValue: 20,
+          toValue: 0.1,
           duration: 0,
           easing: Easing.linear,
           useNativeDriver: true,
         }),
         Animated.timing(fadeAnim, {
           toValue: 0.3,
-          duration: 1200,
-          easing: Easing.elastic(0.68),
+          duration: 1000,
+          easing: Easing.elastic(3),
           useNativeDriver: true,
         }),
+        // Animated.timing(fadeAnim, {
+        //   toValue: 0.2,
+        //   duration: 200,
+        //   easing: Easing.out(Easing.ease),
+        //   useNativeDriver: true,
+        // }),
+        // Animated.timing(fadeAnim, {
+        //   toValue: 0.3,
+        //   duration: 500,
+        //   easing: Easing.out(Easing.ease),
+        //   useNativeDriver: true,
+        // }),
         // Animated.delay(50),
         startTitleAnimation(),
         Animated.delay(1000),
       ]),
     ]).start(() => {
       console.log("Animation DONE");
-      finishAnimation()
+      finishAnimation();
     });
   }, [fadeAnim]);
-  // console.log("props.children", props.children);
+
   return (
     <View className="items-center flex flex-col h-full justify-end">
       <View className="absolute top-10">

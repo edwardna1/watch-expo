@@ -4,11 +4,9 @@ import { Link } from "expo-router";
 import { useStore } from "@lib/store";
 import { useCallback, useEffect, useState } from "react";
 import Breathing from "@components/Breathing";
-import { Logs } from "expo";
 import Animtitle from "@components/Animtitle";
 import { useRouter } from "expo-router";
-import { TouchableOpacity } from "react-native-gesture-handler";
-Logs.enableExpoCliLogging();
+import { TouchableOpacity } from "react-native";
 console.log("LOGGING EXPO IOS CONSOLE");
 const App = () => {
   const router = useRouter();
@@ -33,7 +31,7 @@ const App = () => {
           }}
         >
           <Breathing
-            class="border-2 py-3 px-10 rounded-lg bg-[#450202] focus:bg-[#b9b9b9] w-1/3 items-center justify-center flex flex-nowrap"
+            class="border-2 py-3 px-10 rounded-lg w-1/3 items-center justify-center flex flex-nowrap"
             runOnce={true}
             cool={true}
           >
@@ -67,8 +65,7 @@ const App = () => {
             // className="flex-1"
           >
             <Breathing
-              class="border-2 py-3 px-10 mt-20 rounded-lg bg-[#450202] focus:bg-[#b9b9b9] w-full items-center justify-center flex flex-nowrap"
-              runOnce={true}
+              class="mt-20 rounded-lg w-full items-center justify-center flex flex-nowrap"
               cool={true}
             >
               {/* <Text className="text-white">sss</Text> */}

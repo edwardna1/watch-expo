@@ -9,7 +9,7 @@ import {
   Inter_900Black,
   NunitoSans_700Bold,
   Bangers_400Regular,
-  NunitoSans_800ExtraBold
+  NunitoSans_800ExtraBold,
 } from "@expo-google-fonts/dev";
 
 SplashScreen.preventAutoHideAsync();
@@ -30,6 +30,7 @@ const AppLayout = () => {
       } finally {
         // Tell the application to render
         setAppIsReady(true);
+        SplashScreen.hide();
       }
     }
 
@@ -44,13 +45,11 @@ const AppLayout = () => {
     bng: Bangers_400Regular,
   });
 
-  if (!fontsLoaded) {
-    // The native splash screen will stay visible for as long as there
-    // are `<SplashScreen />` components mounted. This component can be nested.
-
-    return <SplashScreen />;
-  }
-console.log("hel",fontsLoaded)
+  // if (!fontsLoaded) {
+  //   // The native splash screen will stay visible for as long as there
+  //   // are `<SplashScreen />` components mounted. This component can be nested.
+  // }
+  console.log("hel", fontsLoaded);
   return (
     <>
       {/* If app is ready (fonts loaded, API calls made, etc) then app loads else splash screen is shown */}
