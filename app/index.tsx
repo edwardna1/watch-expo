@@ -25,23 +25,44 @@ const App = () => {
   return (
     <SafeAreaView className="flex-1 flex bg-[#070808]">
       <View className="h-[50%]">
-        <TouchableOpacity
-          onPress={() => {
-            router.push("/login");
-          }}
-        >
-          <Breathing
-            class="border-2 py-3 px-10 rounded-lg w-1/3 items-center justify-center flex flex-nowrap"
-            runOnce={true}
-            cool={true}
+        <View className="flex flex-row justify-between items-center px-4">
+          {/* Login Button on the Left */}
+          <TouchableOpacity
+            onPress={() => {
+              router.push("/login");
+            }}
+            className="w-1/2"
           >
-            {/* <Text className="text-white">sss</Text> */}
-            {/* Get started */}
-            <Text className="text-white font-lato text-lg flex flex-nowrap">
-              Login
-            </Text>
-          </Breathing>
-        </TouchableOpacity>
+            <Breathing
+              class="border-2 py-3 px-10 rounded-lg items-center justify-center flex flex-nowrap"
+              runOnce={true}
+              cool={true}
+            >
+              <Text className="text-white font-lato text-lg flex flex-nowrap">
+                Login
+              </Text>
+            </Breathing>
+          </TouchableOpacity>
+
+          {/* Pinging Button on the Right */}
+          <TouchableOpacity
+            onPress={() => {
+              router.push("/ping");
+            }}
+            className="w-1/2"
+          >
+            <Breathing
+              class="border-2 py-3 px-10 rounded-lg items-center justify-center flex flex-nowrap"
+              runOnce={true}
+              cool={true}
+            >
+              <Text className="text-white font-lato text-lg flex flex-nowrap">
+                Ping
+              </Text>
+            </Breathing>
+          </TouchableOpacity>
+        </View>
+
         <View>
           <Animtitle>
             <Image source={require("@assets/eyelogoremoved.png")} />

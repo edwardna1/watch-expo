@@ -1,5 +1,5 @@
 import { useRouter } from "expo-router";
-import React from "react";
+import React, { useState } from "react";
 import {
   Text,
   Linking,
@@ -10,16 +10,36 @@ import {
   Button,
   SafeAreaView,
   TouchableWithoutFeedback,
-  Keyboard
+  Keyboard,
 } from "react-native";
-import Icon from 'react-native-vector-icons/FontAwesome';
+import Icon from "react-native-vector-icons/FontAwesome";
 import { Fontisto } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
+import { createUser } from "../requests/createUser";
+import { MessageBanner } from "@components/bannernotification";
 
 const SignIn = () => {
   const router = useRouter();
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [message, setMessage] = useState("");
+
+  const handleLogin = async () => {
+    console.log("HERE");
+    const isUserCreated = await createUser(username, password);
+    setMessage(isUserCreated);
+  };
+
   return (
     <SafeAreaView className="flex-1 flex bg-[#000000] h-screen">
+      {/* Banner */}
+      {message && (
+        <MessageBanner
+          className="mt-4"
+          message={message}
+          onClose={() => setMessage("")}
+        />
+      )}
       <View className="justify-center h-[63%]">
         <View className="h-full">
           <TouchableOpacity
@@ -47,7 +67,8 @@ const SignIn = () => {
                 className="h-16 pl-4 pb-1 border-[#8B8B8B] border-0.5 text-base text-left bg-[#000000] text-[#B5B5B5] rounded-sm align-middle placeholder-[#ffffff] "
                 placeholder="Username"
                 placeholderTextColor="#8B8B8B"
-                autoFocus
+                value={username}
+                onChangeText={(text) => setUsername(text)}
               ></TextInput>
             </View>
             <View className="mt-7">
@@ -55,6 +76,8 @@ const SignIn = () => {
                 className="h-16 pl-4 pb-1 text-white align-middle text-base border-[#8B8B8B] border-0.5 text-left bg-[#000000] rounded-sm mt-[2%]"
                 placeholder="Password"
                 placeholderTextColor="#8B8B8B"
+                value={password}
+                onChangeText={(text) => setPassword(text)}
               ></TextInput>
             </View>
             <View className="mb-[7%] mt-[5%] flex">
@@ -66,9 +89,7 @@ const SignIn = () => {
 
           <View className="items-center mx-[3.5%]">
             <TouchableOpacity
-              onPress={() =>
-                Linking.openURL("https://www.instagram.com/muhammad__dawood/")
-              }
+              onPress={handleLogin}
               className="bg-[#2E2E2E] mb-[5%] rounded-lg	w-full p-5"
             >
               <Text className=" font-medium	 text-[#B3B3B3] text-md text-center ">
@@ -109,7 +130,7 @@ const SignIn = () => {
           }}
           className="items-center bg-transparent rounded-lg w-[30%] py-3 border-[#8B8B8B] border"
         >
-          <Ionicons name="ios-logo-google" size={24} color="white" />
+          <Ionicons name="logo-google" size={24} color="white" />
         </TouchableOpacity>
       </View>
 

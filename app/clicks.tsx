@@ -8,8 +8,11 @@ import {
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Link } from "expo-router";
 import { useStore } from "@lib/store";
-import { useCallback } from "react";
+import { useCallback, useEffect, useState } from "react";
 import React from "react";
+import { getUsers } from "../requests/getUsers";
+import { formatDate } from "../utils/formatDate";
+import { deleteUser } from "../requests/deleteUser";
 
 const Clicks = () => {
   const click = useStore(useCallback((state) => state.click, []));
@@ -19,47 +22,107 @@ const Clicks = () => {
   const decrementClick = useStore(
     useCallback((state) => state.decrementClick, [])
   );
+  const [users, setUsers] = useState([]);
+  useEffect(() => {
+    // Fetch users when the component mounts
+    const fetchUsers = async () => {
+      try {
+        const userList = await getUsers(); // Call the getUsers function
+        setUsers(userList); // Set the fetched users in state
+      } catch (error) {
+        console.error("Error fetching users:", error);
+      }
+    };
+    fetchUsers();
+  }, []);
 
+  const handleDelete = async (userId) => {
+    try {
+      await deleteUser(userId); // Call deleteUser function
+      setUsers(users.filter((user) => user.id !== userId));
+      alert("User deleted successfully");
+    } catch (error) {
+      console.error("Error deleting user:", error);
+      alert("Failed to delete user");
+    }
+  };
+
+  console.log("users", users);
   return (
-    <SafeAreaView className="flex-1 flex items-center justify-center space-y-8 ">
-      <View className="container m-auto grid grid-cols-3">
-        {/* <View className="grid grid-rows-3 gap-2"> */}
-        <View>
-          <Text>Hello</Text>
-        </View>
-        <View>
-          <Text>Hello</Text>
-        </View>
-        <View>
-          <Text>Hello</Text>
-        </View>
-        <View>
-          <Text>Hello</Text>
-        </View>
-        {/* </View> */}
+    <SafeAreaView className="flex-1 items-center bg-slate-500 p-4">
+      <View>
+        <Text className="text-xl font-bold text-white mb-4">User List</Text>
       </View>
-      <Text className="text-xl w-64 text-center">
-        Hi, this is a page where you can update the number of clicks with
-        zustand
+      <View className="w-full bg-white rounded-lg shadow-md overflow-hidden">
+        {/* Table Header */}
+        <View className="flex-row bg-violet-400 p-4">
+          <Text className="flex-1 font-bold text-white">Username</Text>
+          <Text className="flex-1 font-bold text-white">Password</Text>
+          <Text className="flex-1 font-bold text-white">Created At</Text>
+          <Text className="font-bold text-white">Action</Text>
+        </View>
+
+        {/* Table Rows */}
+        {users.map((user) => (
+          <View
+            key={user.id}
+            className="flex-row items-center border-b border-gray-200 px-4 py-2"
+          >
+            <Text className="flex-1 text-gray-800">{user.username}</Text>
+            <Text className="flex-1 text-gray-800">{user.password}</Text>
+            <Text className="flex-1 text-gray-800">
+              {formatDate(user.createdAt)}
+            </Text>
+            <TouchableOpacity
+              onPress={() => handleDelete(user.id)}
+              className="bg-red-500 px-3 py-1 rounded"
+            >
+              <Text className="text-white text-sm">Delete</Text>
+            </TouchableOpacity>
+          </View>
+        ))}
+      </View>
+
+      <View className="flex-1" />
+      <Text className="text-2xl font-semibold text-center text-white mb-6">
+        Zustand tester
       </Text>
-      <View className="flex flex-row space-x-2 items-center justify-center">
+      <View className="bg-violet-700 rounded-t-lg px-6 py-4 shadow-lg">
+        <View className="flex flex-row items-center justify-center space-x-4">
+          <TouchableOpacity
+            className="bg-red-500 rounded-full p-4 shadow-md"
+            onPress={decrementClick}
+          >
+            <Text className="text-white text-lg font-bold">-</Text>
+          </TouchableOpacity>
+
+          <Text className="text-3xl font-bold text-white">{click}</Text>
+          <TouchableOpacity
+            className="bg-green-500 rounded-full p-4 shadow-md"
+            onPress={incrementClick}
+          >
+            <Text className="text-white text-lg font-bold">+</Text>
+          </TouchableOpacity>
+        </View>
+
+        {/* Try Me Button */}
         <TouchableOpacity
-          className="bg-violet-400 py-1 px-3"
-          onPress={decrementClick}
-        >
-          <Text className="text-md">-</Text>
-        </TouchableOpacity>
-        <Text>{click}</Text>
-        <TouchableOpacity
-          className="bg-violet-400 p-1 px-3"
+          className="mt-6 bg-blue-500 rounded-lg px-6 py-3 shadow-md"
           onPress={incrementClick}
         >
-          <Text className="text-md">+</Text>
+          <Text className="text-white text-lg font-semibold text-center">
+            Try Me
+          </Text>
         </TouchableOpacity>
+
+        {/* Go to Home Page */}
+        <Link
+          className="mt-4 w-full bg-violet-600 text-lg p-3 rounded-lg shadow-md text-center text-white font-semibold"
+          href="/"
+        >
+          Go to Home Page
+        </Link>
       </View>
-      <Link className="text-center w-48 bg-violet-400 text-md p-2" href="/">
-        Go to Home Page
-      </Link>
     </SafeAreaView>
   );
 };
