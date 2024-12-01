@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import {
   SafeAreaView,
   View,
@@ -14,15 +14,14 @@ import {
   where,
 } from "firebase/firestore";
 import { db } from "../firebaseConfig"; // Ensure your Firebase config is correctly imported
-import { useRouter } from "expo-router"; // For navigation
+import { useRouter } from "expo-router";
 
 const Ping = () => {
   const [pingCount, setPingCount] = useState(0);
   const [logs, setLogs] = useState([]); // Store logs fetched from Firestore
-  const [isListening, setIsListening] = useState(false); // Track listening state
+  const [isPinging, setIsPinging] = useState(false); // Track pinging state
   const intervalRef = useRef(null); // Ref to hold the interval ID for adding documents
-  const unsubscribeRef = useRef(null); // Ref to hold the unsubscribe function for Firestore
-  const startTimeRef = useRef(null); // Ref to store the start time
+  const startTimeRef = useRef(null); // Ref to hold the interval ID for adding documents
   const router = useRouter();
 
   // Function to generate a unique video name
@@ -32,21 +31,46 @@ const Ping = () => {
     return `video_${timestamp}_${randomString}`;
   };
 
-  // Function to start pinging and listening
+  // Start pinging: add a new document every 5 seconds
   const startPinging = () => {
-    if (isListening) return; // Prevent multiple intervals and listeners
-    setIsListening(true);
+    if (isPinging) return; // Prevent multiple intervals
+    setIsPinging(true);
 
-    // Record the current timestamp as the start time
-    startTimeRef.current = new Date();
+    intervalRef.current = setInterval(async () => {
+      try {
+        const videoName = generateVideoName();
+        await addDoc(collection(db, "videos"), {
+          name: videoName,
+          createdAt: new Date(),
+        });
+        console.log(`Pinged: ${videoName}`);
+      } catch (error) {
+        console.error("Error adding video:", error);
+      }
+    }, 1000); // Add a record every 5 seconds
+  };
 
-    // Query Firestore for new documents after the start time
+  // Stop pinging
+  const stopPinging = () => {
+    if (intervalRef.current) {
+      clearInterval(intervalRef.current);
+      intervalRef.current = null;
+    }
+    setIsPinging(false);
+    console.log("Stopped pinging...");
+  };
+
+  // Real-time listener for the "videos" collection
+  useEffect(() => {
+    const startTime = new Date(); // Capture the current time on component mount
+
+    // Query Firestore to fetch only documents created after the component mounts
     const videosQuery = query(
       collection(db, "videos"),
-      where("createdAt", ">=", startTimeRef.current)
+      where("createdAt", ">=", startTime)
     );
 
-    unsubscribeRef.current = onSnapshot(videosQuery, (snapshot) => {
+    const unsubscribe = onSnapshot(videosQuery, (snapshot) => {
       const fetchedLogs = snapshot.docs.map((doc) => {
         const data = doc.data();
         return `Name: ${data.name}, Timestamp: ${data.createdAt
@@ -58,40 +82,9 @@ const Ping = () => {
       setPingCount(fetchedLogs.length); // Update the ping count
     });
 
-    // Start adding new documents every 5 seconds
-    intervalRef.current = setInterval(async () => {
-      try {
-        const videoName = generateVideoName();
-        await addDoc(collection(db, "videos"), {
-          name: videoName,
-          createdAt: new Date(),
-        });
-        console.log(`Added video: ${videoName}`);
-      } catch (error) {
-        console.error("Error adding video:", error);
-      }
-    }, 1000);
-
-    console.log("Started pinging and listening...");
-  };
-
-  // Function to stop pinging and listening
-  const stopPinging = () => {
-    // Stop listening to Firestore
-    if (unsubscribeRef.current) {
-      unsubscribeRef.current(); // Unsubscribe from Firestore
-      unsubscribeRef.current = null;
-    }
-
-    // Stop adding new documents
-    if (intervalRef.current) {
-      clearInterval(intervalRef.current); // Clear the interval
-      intervalRef.current = null;
-    }
-
-    setIsListening(false); // Update the listening state
-    console.log("Stopped pinging and listening...");
-  };
+    // Cleanup listener on component unmount
+    return () => unsubscribe();
+  }, []);
 
   return (
     <SafeAreaView className="flex-1 bg-black">
@@ -109,9 +102,9 @@ const Ping = () => {
           <TouchableOpacity
             onPress={startPinging}
             className={`rounded-lg px-6 py-4 shadow-lg flex-1 mr-3 ${
-              isListening ? "bg-gray-600" : "bg-green-600"
+              isPinging ? "bg-gray-600" : "bg-green-600"
             }`}
-            disabled={isListening} // Disable while already listening
+            disabled={isPinging} // Disable while already pinging
           >
             <Text className="text-white text-lg font-semibold text-center">
               Start Ping
@@ -150,7 +143,7 @@ const Ping = () => {
         </View>
       </View>
 
-      {/* Bottom Section */}
+      {/* Bottom Buttons */}
       <View className="px-6 py-4 bg-black flex-row justify-between items-center space-x-4">
         {/* Go to Home Page Button */}
         <TouchableOpacity
@@ -158,7 +151,7 @@ const Ping = () => {
           className="bg-violet-600 rounded-lg px-6 py-4 shadow-lg flex-1"
         >
           <Text className="text-white text-lg font-semibold text-center">
-            Go to Home Page
+            Go to Home
           </Text>
         </TouchableOpacity>
 

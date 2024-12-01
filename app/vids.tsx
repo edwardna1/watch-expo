@@ -6,6 +6,7 @@ import {
   ScrollView,
   TouchableOpacity,
   ActivityIndicator,
+  Alert,
 } from "react-native";
 import { collection, getDocs, deleteDoc, doc } from "firebase/firestore";
 import { db } from "../firebaseConfig"; // Ensure your Firebase config is correctly imported
@@ -52,6 +53,21 @@ const Vids = () => {
     }
   };
 
+  const deleteAllVideos = async () => {
+    try {
+      const querySnapshot = await getDocs(collection(db, "videos"));
+      const batchPromises = querySnapshot.docs.map((docSnapshot) =>
+        deleteDoc(doc(db, "videos", docSnapshot.id))
+      );
+      await Promise.all(batchPromises); // Delete all documents
+      setVideos([]); // Clear local state
+      Alert.alert("Success", "All videos have been deleted.");
+    } catch (error) {
+      console.error("Error deleting all videos:", error);
+      Alert.alert("Error", "Failed to delete all videos.");
+    }
+  };
+
   // Fetch videos on component mount
   useEffect(() => {
     fetchVideos();
@@ -73,10 +89,14 @@ const Vids = () => {
     <GestureHandlerRootView>
       <SafeAreaView className="flex-1 bg-black">
         {/* Header */}
-        <View className="px-4 py-6 border-b border-gray-800">
-          <Text className="text-white text-2xl font-bold text-center">
-            Video Database
-          </Text>
+        <View className="px-4 py-6 border-b border-gray-800 flex-row justify-between items-center">
+          <Text className="text-white text-2xl font-bold">Video Database</Text>
+          <TouchableOpacity
+            onPress={deleteAllVideos}
+            className="bg-red-600 rounded-lg px-4 py-2"
+          >
+            <Text className="text-white text-lg font-semibold">Delete All</Text>
+          </TouchableOpacity>
         </View>
 
         {/* Main Content */}
