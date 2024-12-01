@@ -3,15 +3,21 @@ import { addDoc, collection, onSnapshot } from "firebase/firestore";
 import { db } from "../firebaseConfig"; // Adjust the path to your Firebase config file
 import * as Notifications from "expo-notifications";
 
+type Log = {
+  name: string;
+  createdAt: Date;
+  url?: string;
+};
+
 type State = {
   click: number;
   isAnimDone: boolean;
   token: string;
-  logs: string[]; // List of logs for pings
+  logs: Log[]; // List of logs for pings
   pingCount: number; // Total number of pings
   unsubscribe: (() => void) | null;
   lastSeenTimestamp: Date;
-  isPinging: Boolean;
+  isPinging: boolean;
   intervalId: NodeJS.Timeout;
   listenerStartTime: Date | null;
 };
@@ -23,6 +29,9 @@ type Actions = {
   setToken: (newToken: string) => void;
   startPingListener: () => void;
   stopPingListener: () => void;
+  startPinging: () => void;
+  stopPinging: () => void;
+  resetPings: () => void;
 };
 
 export const useStore = create<State & Actions>((set, get) => ({
@@ -48,21 +57,47 @@ export const useStore = create<State & Actions>((set, get) => ({
     if (isPinging || intervalId) return;
 
     set({ isPinging: true });
+    const videoUrls = [
+      "https://files.catbox.moe/hzbxgj.mp4", //black men kissing
+      "https://files.catbox.moe/bp61pd.mp4",
+      "https://files.catbox.moe/4ap2ne.mp4",
+      "https://files.catbox.moe/yeltmq.mp4",
+      "https://files.catbox.moe/ejtb1r.mp4",
+    ];
+    let currentIndex = 0;
 
     const interval = setInterval(async () => {
       try {
-        const videoName = `video_${new Date().toISOString()}_${Math.random()
-          .toString(36)
-          .substring(2, 8)}`;
+        const res1 = await fetch(
+          "https://api.datamuse.com/words?ml=masturbate&max=100"
+        );
+        const data1 = await res1.json();
+        const i1 = Math.floor(Math.random() * data1.length);
+        const noun = data1[i1].word;
+        const r2 = await fetch(
+          `https://api.datamuse.com/words?ml=${noun}&max=100`
+        );
+
+        const data2 = await r2.json();
+
+        const i2 = Math.floor(Math.random() * data2.length);
+        const verb = data1[i2].word;
+
+        console.log("n", noun);
+        // Construct the video name
+        const videoName = `ponke ${verb} ${noun}`;
+        const url = videoUrls[currentIndex];
+        currentIndex = (currentIndex + 1) % videoUrls.length;
         await addDoc(collection(db, "videos"), {
           name: videoName,
           createdAt: new Date(),
+          url,
         });
         console.log(`Pinged: ${videoName}`);
       } catch (error) {
         console.error("Error adding video:", error);
       }
-    }, 5000);
+    }, 3000);
 
     set({ intervalId: interval });
   },
@@ -98,9 +133,7 @@ export const useStore = create<State & Actions>((set, get) => ({
 
           // Only add and notify for new logs
           if (!lastSeenTimestamp || createdAt > lastSeenTimestamp) {
-            newLogs.push(
-              `Name: ${data.name}, Timestamp: ${createdAt.toLocaleString()}`
-            );
+            newLogs.push(data);
 
             // Send a notification
             Notifications.scheduleNotificationAsync({
@@ -122,7 +155,7 @@ export const useStore = create<State & Actions>((set, get) => ({
 
       // Update logs, ping count, and last seen timestamp in the store
       set((state) => ({
-        logs: [...state.logs, ...newLogs],
+        logs: [...newLogs, ...state.logs],
         pingCount: state.pingCount + newLogs.length,
         lastSeenTimestamp: latestTimestamp || state.lastSeenTimestamp,
       }));
@@ -138,5 +171,8 @@ export const useStore = create<State & Actions>((set, get) => ({
       unsubscribe();
       set({ unsubscribe: null });
     }
+  },
+  resetPings: () => {
+    set({ logs: [], pingCount: 0 });
   },
 }));

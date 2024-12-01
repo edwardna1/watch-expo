@@ -4011,6 +4011,11 @@ expo-asset@~11.0.1:
     invariant "^2.2.4"
     md5-file "^3.2.3"
 
+expo-av@^15.0.1:
+  version "15.0.1"
+  resolved "https://registry.npmjs.org/expo-av/-/expo-av-15.0.1.tgz"
+  integrity sha512-2d4j7RTH9Y5nI1FoC0woRjqnj5G8sF0al2iW6kG21PPs/CgS4QARbHxMrPxKpUXrC6iu+6EMj2h5H6T0nqteFg==
+
 expo-constants@*, expo-constants@~17.0.0, expo-constants@~17.0.3:
   version "17.0.3"
   resolved "https://registry.npmjs.org/expo-constants/-/expo-constants-17.0.3.tgz"
@@ -4122,6 +4127,11 @@ expo-status-bar@~2.0.0:
   version "2.0.0"
   resolved "https://registry.npmjs.org/expo-status-bar/-/expo-status-bar-2.0.0.tgz"
   integrity sha512-vxxdpvpNDMTEc5uTiIrbTvySKKUsOACmfl8OZuUdjNle05oGqwtq3v5YObwym/njSByjoyuZX8UpXBZnxvarwQ==
+
+expo-video@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.npmjs.org/expo-video/-/expo-video-2.0.1.tgz"
+  integrity sha512-daPPGT1mfUjcVNjI5xQIskNS0hYlfoy0rierLnJWePYfDxNozrFbFyD0SvwjQN6QoQ9dSytIMSBWJTAHfuvMWg==
 
 expo@*, expo@^52.0.11:
   version "52.0.11"
@@ -4770,7 +4780,7 @@ internal-ip@^4.3.0:
     default-gateway "^4.2.0"
     ipaddr.js "^1.9.0"
 
-invariant@^2.2.4:
+invariant@^2.2.4, invariant@2.2.4:
   version "2.2.4"
   resolved "https://registry.npmjs.org/invariant/-/invariant-2.2.4.tgz"
   integrity sha512-phJfQVBuaJM5raOpJjSfkiD6BpbCE4Ns//LaXl6wGYtUBY83nWS6Rf9tXm2e8VaK60JEjYldbPif/A2B1C2gNA==
@@ -6667,7 +6677,7 @@ react-native-vector-icons@^10.2.0:
     prop-types "^15.7.2"
     yargs "^16.1.1"
 
-react-native-web@~0.19.13:
+react-native-web@*, react-native-web@~0.19.13:
   version "0.19.13"
   resolved "https://registry.npmjs.org/react-native-web/-/react-native-web-0.19.13.tgz"
   integrity sha512-etv3bN8rJglrRCp/uL4p7l8QvUNUC++QwDbdZ8CB7BvZiMvsxfFIRM1j04vxNldG3uo2puRd6OSWR3ibtmc29A==
@@ -6680,6 +6690,14 @@ react-native-web@~0.19.13:
     nullthrows "^1.1.1"
     postcss-value-parser "^4.2.0"
     styleq "^0.1.3"
+
+react-native-webview@*:
+  version "13.12.4"
+  resolved "https://registry.npmjs.org/react-native-webview/-/react-native-webview-13.12.4.tgz"
+  integrity sha512-8lWeYPVWeOj0ya9ZpDesOQPRgczuN3ogQHlhS21sNXndd4kvfPG+WjlRdrvxYgj//udpwmzcWzagwLnEp60Aqg==
+  dependencies:
+    escape-string-regexp "^4.0.0"
+    invariant "2.2.4"
 
 react-native@*, react-native@>=0.73.0, react-native@0.76.3:
   version "0.76.3"

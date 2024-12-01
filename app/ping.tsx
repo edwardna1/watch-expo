@@ -5,9 +5,11 @@ import {
   Text,
   TouchableOpacity,
   ScrollView,
+  Image,
 } from "react-native";
 import { useRouter } from "expo-router";
 import { useStore } from "@lib/store";
+import { VideoPlayback } from "@components/VideoPlayback";
 
 const Ping = () => {
   const logs = useStore((state) => state.logs);
@@ -15,7 +17,19 @@ const Ping = () => {
   const isPinging = useStore((state) => state.isPinging);
   const startPinging = useStore((state) => state.startPinging);
   const stopPinging = useStore((state) => state.stopPinging);
+  const resetPings = useStore((state) => state.resetPings);
+
   const router = useRouter();
+
+  // Check if the URL is a YouTube video
+  // const isYouTubeVideo = (url) => {
+  //   return /^(https?:\/\/)?(www\.)?(youtube\.com|youtu\.be)\//.test(url);
+  // };
+
+  const isVideo = (url) => {
+    // Simple check for video extensions in the URL
+    return /\.(mp4|mov|avi|mkv|webm)$/i.test(url);
+  };
 
   return (
     <SafeAreaView className="flex-1 bg-black">
@@ -49,6 +63,16 @@ const Ping = () => {
               Stop Ping
             </Text>
           </TouchableOpacity>
+
+          {/* Reset Button */}
+          <TouchableOpacity
+            onPress={resetPings}
+            className="bg-gray-700 rounded-lg px-4 py-3 shadow-lg ml-3"
+          >
+            <Text className="text-white text-sm font-semibold text-center">
+              Reset
+            </Text>
+          </TouchableOpacity>
         </View>
 
         {/* Ping Count */}
@@ -57,15 +81,28 @@ const Ping = () => {
           <Text className="text-green-400 text-2xl font-bold">{pingCount}</Text>
         </View>
 
-        {/* Ping Logs */}
+        {/* Ping Logs with Images, Videos, or YouTube Links */}
         <View className="flex-1 bg-gray-900 rounded-lg py-4 px-6 shadow-lg">
           <Text className="text-white text-lg font-medium mb-4">Ping Log:</Text>
           <ScrollView>
             {logs.length > 0 ? (
               logs.map((log, index) => (
-                <Text key={index} className="text-gray-400 text-base mb-2">
-                  {log}
-                </Text>
+                <View key={index} className="mb-4">
+                  {/* Handle Regular Videos */}
+                  {log.url && <VideoPlayback url={log.url} />}
+                  {/* Handle Images */}
+                  {log.url && !isVideo(log.url) && (
+                    <Image
+                      source={{ uri: log.url }}
+                      className="w-full h-48 rounded-lg mb-2"
+                      resizeMode="cover"
+                    />
+                  )}
+                  {/* Display Log Info */}
+                  <Text className="text-gray-400 text-base">
+                    {log.name || "No message provided"}
+                  </Text>
+                </View>
               ))
             ) : (
               <Text className="text-gray-600 text-base">No pings yet...</Text>
