@@ -21,13 +21,7 @@ const Ping = () => {
 
   const router = useRouter();
 
-  // Check if the URL is a YouTube video
-  // const isYouTubeVideo = (url) => {
-  //   return /^(https?:\/\/)?(www\.)?(youtube\.com|youtu\.be)\//.test(url);
-  // };
-
   const isVideo = (url) => {
-    // Simple check for video extensions in the URL
     return /\.(mp4|mov|avi|mkv|webm)$/i.test(url);
   };
 
@@ -39,17 +33,17 @@ const Ping = () => {
         </Text>
       </View>
 
-      <View className="flex-1 px-6 py-4">
-        <View className="flex-row justify-between items-center mb-6">
+      <View className="flex-1 px-4 py-4">
+        <View className="flex-row justify-between items-center mb-4">
           {/* Start Ping Button */}
           <TouchableOpacity
             onPress={startPinging}
-            className={`rounded-lg px-6 py-4 shadow-lg flex-1 mr-3 ${
+            className={`rounded-lg px-4 py-3 shadow-lg flex-1 mr-2 ${
               isPinging ? "bg-gray-600" : "bg-green-600"
             }`}
             disabled={isPinging}
           >
-            <Text className="text-white text-lg font-semibold text-center">
+            <Text className="text-white text-sm font-semibold text-center">
               Start Ping
             </Text>
           </TouchableOpacity>
@@ -57,9 +51,9 @@ const Ping = () => {
           {/* Stop Ping Button */}
           <TouchableOpacity
             onPress={stopPinging}
-            className="bg-red-600 rounded-lg px-6 py-4 shadow-lg flex-1 ml-3"
+            className="bg-red-600 rounded-lg px-4 py-3 shadow-lg flex-1 ml-2"
           >
-            <Text className="text-white text-lg font-semibold text-center">
+            <Text className="text-white text-sm font-semibold text-center">
               Stop Ping
             </Text>
           </TouchableOpacity>
@@ -67,18 +61,18 @@ const Ping = () => {
           {/* Reset Button */}
           <TouchableOpacity
             onPress={resetPings}
-            className="bg-gray-700 rounded-lg px-4 py-3 shadow-lg ml-3"
+            className="bg-gray-700 rounded-lg px-3 py-2 shadow-lg ml-2"
           >
-            <Text className="text-white text-sm font-semibold text-center">
+            <Text className="text-white text-xs font-semibold text-center">
               Reset
             </Text>
           </TouchableOpacity>
         </View>
 
         {/* Ping Count */}
-        <View className="bg-gray-900 rounded-lg py-4 px-6 mb-6 shadow-lg">
-          <Text className="text-white text-lg font-medium">Total Pings:</Text>
-          <Text className="text-green-400 text-2xl font-bold">{pingCount}</Text>
+        <View className="bg-gray-900 rounded-lg py-2 px-4 mb-4 shadow-lg">
+          <Text className="text-white text-sm font-medium">Total Pings:</Text>
+          <Text className="text-green-400 text-xl font-bold">{pingCount}</Text>
         </View>
 
         {/* Ping Logs with Images, Videos, or YouTube Links */}
@@ -112,20 +106,20 @@ const Ping = () => {
       </View>
 
       {/* Navigation Buttons */}
-      <View className="px-6 py-4 bg-black flex-row justify-between items-center space-x-4">
+      <View className="px-4 py-3 bg-black flex-row justify-between items-center space-x-2">
         <TouchableOpacity
           onPress={() => router.push("/")}
-          className="bg-violet-600 rounded-lg px-6 py-4 shadow-lg flex-1"
+          className="bg-violet-600 rounded-lg px-4 py-3 shadow-lg flex-1"
         >
-          <Text className="text-white text-lg font-semibold text-center">
+          <Text className="text-white text-sm font-semibold text-center">
             Go to Home
           </Text>
         </TouchableOpacity>
         <TouchableOpacity
           onPress={() => router.push("/vids")}
-          className="bg-blue-600 rounded-lg px-6 py-4 shadow-lg flex-1"
+          className="bg-blue-600 rounded-lg px-4 py-3 shadow-lg flex-1"
         >
-          <Text className="text-white text-lg font-semibold text-center">
+          <Text className="text-white text-sm font-semibold text-center">
             See DB
           </Text>
         </TouchableOpacity>
