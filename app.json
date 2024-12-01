@@ -6,6 +6,16 @@
     },
     "plugins": [
       "expo-router"
-    ]
+    ],
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "b3ddff5a-9d25-4384-9d69-f692ef527840"
+      }
+    },
+    "owner": "enclassy",
+    "slug": "tether"
   }
 }

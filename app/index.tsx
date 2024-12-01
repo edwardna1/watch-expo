@@ -7,6 +7,7 @@ import Breathing from "@components/Breathing";
 import Animtitle from "@components/Animtitle";
 import { useRouter } from "expo-router";
 import { TouchableOpacity } from "react-native";
+
 const App = () => {
   const router = useRouter();
   // const fadeAnim = useRef(new Animated.Value(0)).current;
@@ -15,6 +16,15 @@ const App = () => {
   const incrementClick = useStore(
     useCallback((state) => state.incrementClick, [])
   );
+  const startPingListener = useStore((state) => state.startPingListener);
+
+  useEffect(() => {
+    startPingListener(); // Start the Firebase listener when the app loads
+
+    return () => {
+      // Cleanup is handled inside Zustand's store
+    };
+  }, [startPingListener]);
   return (
     <SafeAreaView className="flex-1 flex bg-[#070808]">
       <View className="h-[50%]">
@@ -24,14 +34,14 @@ const App = () => {
             onPress={() => {
               router.push("/login");
             }}
-            className="w-1/2"
+            className="w-1/3"
           >
             <Breathing
               class="border-2 py-3 px-10 rounded-lg items-center justify-center flex flex-nowrap"
               runOnce={true}
               cool={true}
             >
-              <Text className="text-white font-lato text-lg flex flex-nowrap">
+              <Text className="text-white font-lato text-md flex flex-nowrap">
                 Login
               </Text>
             </Breathing>
@@ -42,15 +52,31 @@ const App = () => {
             onPress={() => {
               router.push("/ping");
             }}
-            className="w-1/2"
+            className="w-1/3"
           >
             <Breathing
               class="border-2 py-3 px-10 rounded-lg items-center justify-center flex flex-nowrap"
               runOnce={true}
               cool={true}
             >
-              <Text className="text-white font-lato text-lg flex flex-nowrap">
-                Ping
+              <Text className="text-white font-lato text-md flex flex-nowrap">
+                Pings
+              </Text>
+            </Breathing>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => {
+              router.push("/notifications");
+            }}
+            className="w-1/3"
+          >
+            <Breathing
+              class="border-2 py-3 px-2 rounded-lg items-center justify-center flex flex-nowrap"
+              runOnce={true}
+              cool={true}
+            >
+              <Text className="text-white font-lato text-md flex flex-nowrap">
+                Notifications
               </Text>
             </Breathing>
           </TouchableOpacity>
