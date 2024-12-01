@@ -7,7 +7,6 @@ import Breathing from "@components/Breathing";
 import Animtitle from "@components/Animtitle";
 import { useRouter } from "expo-router";
 import { TouchableOpacity } from "react-native";
-console.log("LOGGING EXPO IOS CONSOLE");
 const App = () => {
   const router = useRouter();
   // const fadeAnim = useRef(new Animated.Value(0)).current;
@@ -16,12 +15,6 @@ const App = () => {
   const incrementClick = useStore(
     useCallback((state) => state.incrementClick, [])
   );
-
-  // const [isAnimDone, setIsAnimDone] = useState(false);
-  // if (isAnimDone) {
-  //   incrementClick();
-  //   setIsAnimDone(false);
-  // }
   return (
     <SafeAreaView className="flex-1 flex bg-[#070808]">
       <View className="h-[50%]">

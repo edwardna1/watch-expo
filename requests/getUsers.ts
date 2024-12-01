@@ -5,7 +5,6 @@ import { db } from "../firebaseConfig";
 
 // TODO: Replace the following with your app's Firebase project configuration
 
-console.log("db", db);
 // Get a list of cities from your database
 export const getUsers = async () => {
   try {

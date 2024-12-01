@@ -23,8 +23,6 @@ const Animtitle: React.FC<BreathingProps> = (props) => {
     useCallback((state) => state.finishAnimation, [])
   );
 
-  console.log("tt", word);
-
   const startTitleAnimation = () => {
     return Animated.stagger(50, [
       Animated.timing(textAnim[0], {

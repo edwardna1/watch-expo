@@ -52,7 +52,6 @@ const AppLayout = () => {
   //   // The native splash screen will stay visible for as long as there
   //   // are `<SplashScreen />` components mounted. This component can be nested.
   // }
-  console.log("hel", fontsLoaded);
   return (
     <>
       {/* If app is ready (fonts loaded, API calls made, etc) then app loads else splash screen is shown */}

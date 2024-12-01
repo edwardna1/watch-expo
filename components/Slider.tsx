@@ -40,7 +40,7 @@ const SwipeButton = ({ onToggle }) => {
   };
 
   // Gesture Handler Events
-  console.log("wid", H_SWIPE_RANGE);
+
   const animatedGestureHandler = useAnimatedGestureHandler({
     onStart: (_, ctx: any) => {
       ctx.completed = toggled;

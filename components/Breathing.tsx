@@ -11,7 +11,7 @@ type BreathingProps = PropsWithChildren<{
 
 const Breathing: React.FC<BreathingProps> = (props) => {
   const fadeAnim = useRef(new Animated.Value(0.1)).current; // Initial value for opacity: 0
-// console.log("props", props);
+  // console.log("props", props);
 
   const onceAnimation = () => {
     Animated.timing(fadeAnim, {
@@ -19,9 +19,7 @@ const Breathing: React.FC<BreathingProps> = (props) => {
       duration: 300,
       easing: Easing.linear,
       useNativeDriver: true,
-    }).start(() => {
-      console.log("done running once");
-    });
+    }).start(() => {});
   };
 
   useEffect(() => {
