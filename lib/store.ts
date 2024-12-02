@@ -5,7 +5,7 @@ import * as Notifications from "expo-notifications";
 
 type Log = {
   name: string;
-  createdAt: Date;
+  createdAt: any;
   url?: string;
 };
 

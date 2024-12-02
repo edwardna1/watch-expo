@@ -27,9 +27,9 @@ const Ping = () => {
 
   return (
     <SafeAreaView className="flex-1 bg-black">
-      <View className="px-4 py-6 border-b border-gray-800">
+      <View className="px-4 py-3 border-b border-gray-800">
         <Text className="text-white text-2xl font-bold text-center">
-          Ping Dashboard
+          Videos
         </Text>
       </View>
 
@@ -77,11 +77,11 @@ const Ping = () => {
 
         {/* Ping Logs with Images, Videos, or YouTube Links */}
         <View className="flex-1 bg-gray-900 rounded-lg py-4 px-6 shadow-lg">
-          <Text className="text-white text-lg font-medium mb-4">Ping Log:</Text>
+          <Text className="text-white text-lg font-medium mb-4">Log:</Text>
           <ScrollView>
             {logs.length > 0 ? (
               logs.map((log, index) => (
-                <View key={index} className="mb-4">
+                <View key={index} className="mb-6">
                   {/* Handle Regular Videos */}
                   {log.url && <VideoPlayback url={log.url} />}
                   {/* Handle Images */}
@@ -93,9 +93,18 @@ const Ping = () => {
                     />
                   )}
                   {/* Display Log Info */}
-                  <Text className="text-gray-400 text-base">
-                    {log.name || "No message provided"}
-                  </Text>
+                  <View className="bg-gray-800 rounded-lg p-4">
+                    <Text className="text-white text-base font-semibold mb-1">
+                      {log.name || "No message provided"}
+                    </Text>
+                    {log.createdAt && (
+                      <Text className="text-gray-400 text-sm font-light">
+                        {log.createdAt.toDate().toLocaleString()}
+                      </Text>
+                    )}
+                  </View>
+                  {/* Separator */}
+                  <View className="border-b border-gray-700 my-4"></View>
                 </View>
               ))
             ) : (
