@@ -108,7 +108,7 @@ const Ping = () => {
                 </View>
               ))
             ) : (
-              <Text className="text-gray-600 text-base">No pings yet...</Text>
+              <Text className="text-gray-600 text-base">No videos yet...</Text>
             )}
           </ScrollView>
         </View>
