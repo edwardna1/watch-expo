@@ -40,7 +40,7 @@ const home = () => {
         <View className="absolute top-[15%] ">
           <TouchableOpacity
             onPress={() => {
-              router.push("/lock");
+              router.push("/ping");
             }}
           >
             <Image

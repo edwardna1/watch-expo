@@ -58,6 +58,7 @@ export const useStore = create<State & Actions>((set, get) => ({
 
     set({ isPinging: true });
     const videoUrls = [
+      "https://files.catbox.moe/pm277c.mp4",
       "https://files.catbox.moe/hzbxgj.mp4", //black men kissing
       "https://files.catbox.moe/bp61pd.mp4",
       "https://files.catbox.moe/4ap2ne.mp4",
@@ -69,13 +70,13 @@ export const useStore = create<State & Actions>((set, get) => ({
     const interval = setInterval(async () => {
       try {
         const res1 = await fetch(
-          "https://api.datamuse.com/words?ml=masturbate&max=100"
+          "https://api.datamuse.com/words?rel_jja=student&max=100"
         );
         const data1 = await res1.json();
         const i1 = Math.floor(Math.random() * data1.length);
         const noun = data1[i1].word;
         const r2 = await fetch(
-          `https://api.datamuse.com/words?ml=${noun}&max=100`
+          `https://api.datamuse.com/words?rel_jjb=${noun}&max=100`
         );
 
         const data2 = await r2.json();
@@ -85,11 +86,11 @@ export const useStore = create<State & Actions>((set, get) => ({
 
         console.log("n", noun);
         // Construct the video name
-        const videoName = `ponke ${verb} ${noun}`;
-        const url = videoUrls[currentIndex];
-        currentIndex = (currentIndex + 1) % videoUrls.length;
+        const videoName = `${verb} ${noun}`;
+        const url = videoUrls[currentIndex % videoUrls.length];
+        currentIndex = currentIndex + 1;
         await addDoc(collection(db, "videos"), {
-          name: videoName,
+          name: `Video ${currentIndex}`,
           createdAt: new Date(),
           url,
         });
@@ -138,8 +139,8 @@ export const useStore = create<State & Actions>((set, get) => ({
             // Send a notification
             Notifications.scheduleNotificationAsync({
               content: {
-                title: "New Ping Added",
-                body: `Name: ${data.name}`,
+                title: "Theft Alert",
+                body: `Proximity breach detected. Tap to view.`,
                 data: { ping: data },
               },
               trigger: null,

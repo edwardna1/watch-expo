@@ -118,7 +118,7 @@ const Ping = () => {
       <View className="px-4 py-3 bg-black flex-row justify-between items-center space-x-2">
         <TouchableOpacity
           onPress={() => router.push("/")}
-          className="bg-violet-600 rounded-lg px-4 py-3 shadow-lg flex-1"
+          className="bg-gray-900 rounded-lg px-4 py-3 shadow-lg flex-1"
         >
           <Text className="text-white text-sm font-semibold text-center">
             Go to Home
@@ -126,7 +126,7 @@ const Ping = () => {
         </TouchableOpacity>
         <TouchableOpacity
           onPress={() => router.push("/vids")}
-          className="bg-blue-600 rounded-lg px-4 py-3 shadow-lg flex-1"
+          className="bg-gray-900 rounded-lg px-4 py-3 shadow-lg flex-1"
         >
           <Text className="text-white text-sm font-semibold text-center">
             See DB
