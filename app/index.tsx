@@ -106,7 +106,7 @@ const App = () => {
           {/* <Link href="/home"> */}
           <TouchableOpacity
             onPress={() => {
-              router.push("/home");
+              router.push("/onboarding");
             }}
             // className="flex-1"
           >

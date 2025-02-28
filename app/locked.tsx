@@ -86,9 +86,18 @@ const LockedScreen = () => {
               </View>
             ))
           ) : (
-            <Text className="text-gray-600 text-center mt-10">
-              No recent logs...
-            </Text>
+            <View className="flex-1 justify-center items-center mt-20">
+              <Image
+                source={{ uri: "https://files.catbox.moe/4vpbk3.png" }}
+                className="w-64 h-64"
+                resizeMode="contain"
+              />
+              <View className="absolute bottom-[-40px] px-4 py-2 rounded-md">
+                <Text className="text-white text-center italic">
+                  Everything seems alright.{"\n"}Nothing to worry about
+                </Text>
+              </View>
+            </View>
           )}
         </ScrollView>
       </View>
