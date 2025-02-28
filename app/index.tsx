@@ -83,9 +83,15 @@ const App = () => {
         </View>
 
         <View>
-          <Animtitle>
-            <Image source={require("@assets/eyelogoremoved.png")} />
-          </Animtitle>
+          <TouchableOpacity
+            onPress={() => {
+              router.push("/home");
+            }}
+          >
+            <Animtitle>
+              <Image source={require("@assets/eyelogoremoved.png")} />
+            </Animtitle>
+          </TouchableOpacity>
         </View>
       </View>
       {(isAnimDone || click > 0) && (
@@ -100,7 +106,7 @@ const App = () => {
           {/* <Link href="/home"> */}
           <TouchableOpacity
             onPress={() => {
-              router.push("/home");
+              router.push("/onboarding");
             }}
             // className="flex-1"
           >
