@@ -83,9 +83,15 @@ const App = () => {
         </View>
 
         <View>
-          <Animtitle>
-            <Image source={require("@assets/eyelogoremoved.png")} />
-          </Animtitle>
+          <TouchableOpacity
+            onPress={() => {
+              router.push("/home");
+            }}
+          >
+            <Animtitle>
+              <Image source={require("@assets/eyelogoremoved.png")} />
+            </Animtitle>
+          </TouchableOpacity>
         </View>
       </View>
       {(isAnimDone || click > 0) && (
