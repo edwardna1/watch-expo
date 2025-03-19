@@ -13,6 +13,7 @@ import React from "react";
 import { getUsers } from "../requests/getUsers";
 import { formatDate } from "../utils/formatDate";
 import { deleteUser } from "../requests/deleteUser";
+import { startDeviceScript, stopDeviceScript } from "../utils/startDevice";
 
 const Clicks = () => {
   const click = useStore(useCallback((state) => state.click, []));
@@ -91,7 +92,7 @@ const Clicks = () => {
         <View className="flex flex-row items-center justify-center space-x-4">
           <TouchableOpacity
             className="bg-red-500 rounded-full p-4 shadow-md"
-            onPress={decrementClick}
+            onPress={stopDeviceScript}
           >
             <Text className="text-white text-lg font-bold">-</Text>
           </TouchableOpacity>
@@ -99,7 +100,7 @@ const Clicks = () => {
           <Text className="text-3xl font-bold text-white">{click}</Text>
           <TouchableOpacity
             className="bg-green-500 rounded-full p-4 shadow-md"
-            onPress={incrementClick}
+            onPress={startDeviceScript}
           >
             <Text className="text-white text-lg font-bold">+</Text>
           </TouchableOpacity>
