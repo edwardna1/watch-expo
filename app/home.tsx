@@ -1,13 +1,18 @@
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Link, useRouter } from "expo-router";
-import React from "react";
+import React, { useCallback } from "react";
 import { Text, Linking, Image, View, TouchableOpacity } from "react-native";
 import data from "./data";
 import MyDevice from "./myDevice";
 import { AntDesign } from "@expo/vector-icons";
 import { Octicons } from "@expo/vector-icons";
+import { startDeviceScript } from "../utils/startDevice";
+import { sendPushNotification } from "./notifications";
+import { useStore } from "@lib/store";
+import * as Notifications from "expo-notifications";
 
 const home = () => {
+  const expoPushToken = useStore(useCallback((state) => state.token, []));
   const router = useRouter();
   const Device = data.map((item) => {
     return <MyDevice name={item.name} date={item.date} />;
@@ -39,8 +44,22 @@ const home = () => {
       <View className="flex h-[85%] relative items-center">
         <View className="absolute top-[15%] ">
           <TouchableOpacity
-            onPress={() => {
+            onPress={async () => {
+              const isStarted = await startDeviceScript();
+              Notifications.scheduleNotificationAsync({
+                content: {
+                  title: isStarted
+                    ? "Device Started"
+                    : "Device Failed to Start",
+                  body: isStarted
+                    ? "The device started successfully!"
+                    : "The device failed to start. Please try again.",
+                },
+                trigger: null,
+              });
               router.push("/locked");
+              // await sendPushNotification(expoPushToken);
+              // router.push("/locked");
             }}
           >
             <Image

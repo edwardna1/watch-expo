@@ -17,6 +17,7 @@ import { startDeviceScript, stopDeviceScript } from "../utils/startDevice";
 
 const Clicks = () => {
   const click = useStore(useCallback((state) => state.click, []));
+  const token = useStore(useCallback((state) => state.token, []));
   const incrementClick = useStore(
     useCallback((state) => state.incrementClick, [])
   );
@@ -24,12 +25,12 @@ const Clicks = () => {
     useCallback((state) => state.decrementClick, [])
   );
   const [users, setUsers] = useState([]);
+  
   useEffect(() => {
-    // Fetch users when the component mounts
     const fetchUsers = async () => {
       try {
-        const userList = await getUsers(); // Call the getUsers function
-        setUsers(userList); // Set the fetched users in state
+        const userList = await getUsers();
+        setUsers(userList);
       } catch (error) {
         console.error("Error fetching users:", error);
       }
@@ -37,9 +38,9 @@ const Clicks = () => {
     fetchUsers();
   }, []);
 
-  const handleDelete = async (userId) => {
+  const handleDelete = async (userId: string) => {
     try {
-      await deleteUser(userId); // Call deleteUser function
+      await deleteUser(userId);
       setUsers(users.filter((user) => user.id !== userId));
       alert("User deleted successfully");
     } catch (error) {
@@ -48,14 +49,12 @@ const Clicks = () => {
     }
   };
 
-  console.log("users", users);
   return (
     <SafeAreaView className="flex-1 items-center bg-slate-500 p-4">
       <View>
         <Text className="text-xl font-bold text-white mb-4">User List</Text>
       </View>
       <View className="w-full bg-white rounded-lg shadow-md overflow-hidden">
-        {/* Table Header */}
         <View className="flex-row bg-violet-400 p-4">
           <Text className="flex-1 font-bold text-white">Username</Text>
           <Text className="flex-1 font-bold text-white">Password</Text>
@@ -63,7 +62,6 @@ const Clicks = () => {
           <Text className="font-bold text-white">Action</Text>
         </View>
 
-        {/* Table Rows */}
         {users.map((user) => (
           <View
             key={user.id}
@@ -92,7 +90,7 @@ const Clicks = () => {
         <View className="flex flex-row items-center justify-center space-x-4">
           <TouchableOpacity
             className="bg-red-500 rounded-full p-4 shadow-md"
-            onPress={stopDeviceScript}
+            onPress={decrementClick}
           >
             <Text className="text-white text-lg font-bold">-</Text>
           </TouchableOpacity>
@@ -100,13 +98,29 @@ const Clicks = () => {
           <Text className="text-3xl font-bold text-white">{click}</Text>
           <TouchableOpacity
             className="bg-green-500 rounded-full p-4 shadow-md"
-            onPress={startDeviceScript}
+            onPress={incrementClick}
           >
             <Text className="text-white text-lg font-bold">+</Text>
           </TouchableOpacity>
         </View>
 
-        {/* Try Me Button */}
+        {/* New Start/Stop Buttons */}
+        <View className="flex flex-row justify-center space-x-4 mt-6">
+          <TouchableOpacity
+            className="bg-blue-500 rounded-lg px-6 py-3 shadow-md"
+            onPress={startDeviceScript}
+          >
+            <Text className="text-white text-lg font-semibold">Start Script</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            className="bg-red-500 rounded-lg px-6 py-3 shadow-md"
+            onPress={stopDeviceScript}
+          >
+            <Text className="text-white text-lg font-semibold">Stop Script {token}</Text>
+          </TouchableOpacity>
+        </View>
+
         <TouchableOpacity
           className="mt-6 bg-blue-500 rounded-lg px-6 py-3 shadow-md"
           onPress={incrementClick}
@@ -116,7 +130,6 @@ const Clicks = () => {
           </Text>
         </TouchableOpacity>
 
-        {/* Go to Home Page */}
         <Link
           className="mt-4 w-full bg-violet-600 text-lg p-3 rounded-lg shadow-md text-center text-white font-semibold"
           href="/"

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import {
   View,
   Text,
@@ -13,11 +13,15 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { AntDesign } from "@expo/vector-icons";
 import { useStore } from "@lib/store";
 import { VideoPlayback } from "@components/VideoPlayback";
+import { stopDeviceScript } from "../utils/startDevice";
+import { sendPushNotification } from "./notifications";
+import * as Notifications from "expo-notifications";
 
 const { width } = Dimensions.get("window");
 const SLIDER_WIDTH = width * 0.75;
 
 const LockedScreen = () => {
+  const expoPushToken = useStore(useCallback((state) => state.token, []));
   const router = useRouter();
   const logs = useStore((state) => state.logs);
   const [slideX] = useState(new Animated.Value(0));
@@ -29,8 +33,18 @@ const LockedScreen = () => {
       const newX = Math.min(Math.max(0, gesture.dx), SLIDER_WIDTH);
       slideX.setValue(newX);
     },
-    onPanResponderRelease: (_, gesture) => {
+    onPanResponderRelease: async (_, gesture) => {
       if (gesture.dx > SLIDER_WIDTH * 0.8) {
+        const isStopped = await stopDeviceScript();
+        Notifications.scheduleNotificationAsync({
+          content: {
+            title: isStopped ? "Device Stopped" : "Device Failed to Stop",
+            body: isStopped
+              ? "The device stopped successfully!"
+              : "The device failed to stop. Please try again.",
+          },
+          trigger: null,
+        });
         router.push("/home");
       } else {
         Animated.spring(slideX, { toValue: 0, useNativeDriver: false }).start();

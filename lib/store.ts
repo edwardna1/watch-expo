@@ -9,6 +9,7 @@ type Log = {
   url?: string;
 };
 
+
 type State = {
   click: number;
   isAnimDone: boolean;
@@ -34,10 +35,21 @@ type Actions = {
   resetPings: () => void;
 };
 
+interface DeviceStore {
+  isScriptRunning: boolean;
+  setScriptRunning: (running: boolean) => void;
+}
+
+export const useDeviceStore = create<DeviceStore>((set) => ({
+  isScriptRunning: false,
+  setScriptRunning: (running) => set({ isScriptRunning: running }),
+}));
+
+
 export const useStore = create<State & Actions>((set, get) => ({
   click: 0,
   isAnimDone: false,
-  token: "",
+  token: "oBooLnOwCPpNr0F8uFQQuV",
   logs: [], // Initialize logs as an empty array
   pingCount: 0, // Initialize ping count as 0
   unsubscribe: null, // No listener initially
@@ -49,6 +61,7 @@ export const useStore = create<State & Actions>((set, get) => ({
   decrementClick: () => set((state) => ({ click: state.click - 1 })),
   finishAnimation: () => set(() => ({ isAnimDone: true })),
   setToken: (newToken: string) => set(() => ({ token: newToken })),
+
 
   startPinging: async () => {
     const { isPinging, intervalId } = get();

@@ -1,9 +1,10 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { Text, View, Button, Platform } from "react-native";
 import * as Device from "expo-device";
 import * as Notifications from "expo-notifications";
 import Constants from "expo-constants";
 import { router } from "expo-router";
+import { useStore } from "@lib/store";
 
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
@@ -13,12 +14,12 @@ Notifications.setNotificationHandler({
   }),
 });
 
-async function sendPushNotification(expoPushToken: string) {
+export async function sendPushNotification(expoPushToken: string, title="default", body="body") {
   const message = {
     to: expoPushToken,
     sound: "default",
-    title: "Original Title",
-    body: "And here is the body!",
+    title: title,
+    body: body,
     data: { someData: "goes here" },
   };
 
@@ -77,6 +78,14 @@ async function registerForPushNotificationsAsync() {
         })
       ).data;
       console.log(pushTokenString);
+      await fetch("http://100.96.222.60:5001/register_token", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ token: pushTokenString }),
+      });
+
       return pushTokenString;
     } catch (e: unknown) {
       handleRegistrationError(`${e}`);
@@ -87,7 +96,8 @@ async function registerForPushNotificationsAsync() {
 }
 
 export default function App() {
-  const [expoPushToken, setExpoPushToken] = useState("");
+  const expoPushToken =  useStore(useCallback((state) => state.token, []));
+  const setExpoPushToken = useStore((state) => state.setToken);
   const [notification, setNotification] = useState<
     Notifications.Notification | undefined
   >(undefined);
