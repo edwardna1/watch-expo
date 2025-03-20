@@ -31,7 +31,7 @@ const LockedScreen = () => {
     onMoveShouldSetPanResponder: () => true,
     onPanResponderMove: (_, gesture) => {
       const newX = Math.min(Math.max(0, gesture.dx), SLIDER_WIDTH);
-      slideX.setValue(newX);
+      slideX.setValue(newX);  
     },
     onPanResponderRelease: async (_, gesture) => {
       if (gesture.dx > SLIDER_WIDTH * 0.8) {

@@ -15,7 +15,7 @@ const home = () => {
   const expoPushToken = useStore(useCallback((state) => state.token, []));
   const router = useRouter();
   const Device = data.map((item) => {
-    return <MyDevice name={item.name} date={item.date} />;
+    return <MyDevice name={item.name} date={item.date} key={item.date}/>;
   });
 
   return (
@@ -57,7 +57,9 @@ const home = () => {
                 },
                 trigger: null,
               });
-              router.push("/locked");
+              // if (isStarted) {
+                router.push("/locked");
+              // }
               // await sendPushNotification(expoPushToken);
               // router.push("/locked");
             }}
