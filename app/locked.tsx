@@ -31,7 +31,7 @@ const LockedScreen = () => {
     onMoveShouldSetPanResponder: () => true,
     onPanResponderMove: (_, gesture) => {
       const newX = Math.min(Math.max(0, gesture.dx), SLIDER_WIDTH);
-      slideX.setValue(newX);  
+      slideX.setValue(newX);
     },
     onPanResponderRelease: async (_, gesture) => {
       if (gesture.dx > SLIDER_WIDTH * 0.8) {
@@ -59,13 +59,16 @@ const LockedScreen = () => {
     <SafeAreaView className="flex-1 bg-black">
       {/* Header Section */}
       <View className="absolute top-10 left-5">
-        <Text className="text-white text-3xl font-bold">Device TETHERED</Text>
-        <Text className="text-green-400 mt-1">LOCKED MODE 🔒 CONNECTED</Text>
+        <Text className="text-white text-3xl font-bold">Device tethered</Text>
+        <Text className="text-green-400 mt-1">Locked Mode 🔒 Connected</Text>
       </View>
 
       {/* Logs Section */}
       <View className="flex-1 mt-24 px-4">
-        <ScrollView className="space-y-4">
+        <ScrollView
+          className="space-y-4"
+          contentContainerStyle={{ paddingBottom: 100 }}
+        >
           {logs.length > 0 ? (
             logs.map((log, index) => (
               <View key={index} className="bg-gray-900 rounded-lg p-3">
